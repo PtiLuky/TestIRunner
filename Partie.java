@@ -30,9 +30,9 @@ public class Partie extends JFrame implements ActionListener{
 		ecran=new Rectangle(0,0,getSize().width,getSize().height);
 		
 
-		menuPlay = new Bouton("playbis", l/2,250);
+		menuPlay = new Bouton("Jouer", l/2,200);
 		menuPlay.addActionListener(this);
-		menuQuit = new Bouton("quit", l/2,350);
+		menuQuit = new Bouton("quitter", l/2,400);
 		menuQuit.addActionListener(this);
 		menu2 = new Bouton("2-", l/2,80);
 		menu2.addActionListener(this);
@@ -43,7 +43,7 @@ public class Partie extends JFrame implements ActionListener{
 		menuMenu = new Bouton("menu", l/2,400);
 		menuMenu.addActionListener(this);
 		
-		jeuQuit = new Bouton("quit-mini", l-74,10);
+		jeuQuit = new Bouton("quitter-mini", l-94,10);
 		jeuQuit.addActionListener(this);
 		jeuMenu = new Bouton("menu-mini", 74,10);
 		jeuMenu.addActionListener(this);
@@ -56,7 +56,7 @@ public class Partie extends JFrame implements ActionListener{
 		}
 		titre=new JLabel("TestIRunner");
 		titre.setFont(font);
-		titre.setForeground(new Color(202,124,124));
+		titre.setForeground(new Color(222,124,124));
 		titre.setBounds(l/2-150,10,300,100);
 		
 		affichage=new Menu(0,l,h);
