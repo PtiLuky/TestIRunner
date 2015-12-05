@@ -12,7 +12,7 @@ public class Bouton extends JButton implements MouseListener{
 	int x,y,l,h;
 	
 	Bouton(String nom,int xCentre, int yHaut){
-		super("test");
+		super(nom);
 
 		 try {
 			 imgNeutre =  ImageIO.read(new File("images/boutons/"+nom+"1.png"));	//img du bouton
@@ -37,24 +37,13 @@ public class Bouton extends JButton implements MouseListener{
 		g.drawImage(imgActuelle,0,0,null);
 	}
 
-	public void mouseClicked(MouseEvent arg0) {
-	}
+	public void mouseClicked(MouseEvent arg0) {}
 
-	public void mouseEntered(MouseEvent arg0) {
-		imgActuelle=imgUp;
-		
-	}
+	public void mouseEntered(MouseEvent arg0) {imgActuelle=imgUp;}
 
-	public void mouseExited(MouseEvent arg0) {
-		imgActuelle=imgNeutre;
-	}
+	public void mouseExited(MouseEvent arg0) {imgActuelle=imgNeutre;}
 
-	public void mouseReleased(MouseEvent arg0) {
-		imgActuelle=imgNeutre;
-	}
+	public void mouseReleased(MouseEvent arg0) {imgActuelle=imgNeutre;}
 
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		imgActuelle=imgReleased;
-	}
+	public void mousePressed(MouseEvent arg0) {imgActuelle=imgReleased;}
 }
