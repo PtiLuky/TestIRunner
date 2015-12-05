@@ -81,7 +81,6 @@ abstract class Terrain {
 				for(int i=1;i<terrain.length;i++)
 					terrain[i][j]=terrain[i][j+1];
 			generTerrain(terrain,terrain[0].length-1,terrain[1][0].x);
-			System.out.print(terrain[1][0].x);
 		}
 	}
 	
