@@ -19,7 +19,8 @@ public class Bouton extends JButton implements MouseListener{
 			 imgUp =  ImageIO.read(new File("images/boutons/"+nom+"2.png"));		//img au survol
 			 imgReleased =  ImageIO.read(new File("images/boutons/"+nom+"3.png"));	//img au moment du clic
 		    } catch (IOException e) {
-		      e.printStackTrace();
+		      e.printStackTrace();            
+	          System.exit(0);    
 		    }
 		 imgActuelle=imgNeutre;
 		 x=xCentre-imgActuelle.getWidth()/2;

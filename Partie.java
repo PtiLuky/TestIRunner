@@ -3,6 +3,8 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -10,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class Partie extends JFrame implements ActionListener{
+public class Partie extends JFrame implements ActionListener, KeyListener{
 	int l,h;
 	Rectangle ecran;
 	//grands boutons
@@ -21,6 +23,7 @@ public class Partie extends JFrame implements ActionListener{
 	JLabel titre,nbrJoueurs;
 	Font font;
 	boolean jeuEnCours=false;
+	Jeu game;
 	
 	public Partie(int l,int h){
 		super("Test I-Runner");
@@ -77,6 +80,9 @@ public class Partie extends JFrame implements ActionListener{
 		
 		setContentPane(affichage);
 		setVisible(true); 
+		setFocusable(true);
+		requestFocusInWindow();
+		this.addKeyListener(this);
 		
 	}
 	
@@ -113,12 +119,14 @@ public class Partie extends JFrame implements ActionListener{
 			
 		//GoTo game
 		}else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
-			if(arg0.getSource()==menu2)
-				affichage=new Jeu(2,l,h);
+			/*if(arg0.getSource()==menu2)
+				game=new Jeu(2,l,h);
 			else if(arg0.getSource()==menu3)
-				affichage=new Jeu(3,l,h);
+				game=new Jeu(3,l,h);
 			else if(arg0.getSource()==menu4)
-					affichage=new Jeu(4,l,h);
+				game=new Jeu(4,l,h);*/
+			game=new Jeu(1,l,h);
+			affichage=game;
 			jeuEnCours=true;
 			affichage.add(jeuQuit);
 			affichage.add(jeuMenu);
@@ -128,7 +136,22 @@ public class Partie extends JFrame implements ActionListener{
 		}
 		
 		
-		
+	}
+	
+	public void keyPressed(KeyEvent e){
+		if(game!=null)
+			 switch(e.getKeyCode()){
+			 case KeyEvent.VK_SPACE :
+				 game.persos[0].gravity=!game.persos[0].gravity;
+				 game.persos[0].saut=true;
+				 game.persos[0].tempsSaut=4;
+				 break;
+			}
 	}
 
+	public void keyReleased(KeyEvent e) {}
+
+	public void keyTyped(KeyEvent e) {}
+
+	
 }

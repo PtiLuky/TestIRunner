@@ -11,21 +11,21 @@ public class  Objet {
     int h,l;                
     int vitesseX, vitesseY;          
     BufferedImage image;    
-    Rectangle BoxObjet;  
+    Rectangle BoxObjet,BoxHaut,BoxBas,BoxGauche,BoxDroite; 
     char type;
     boolean actif;          
    
     // Constructeur
     public Objet(String NomImage, char type,int ax, int ay, int vx, int vy)    {
-    super();
-         try {
-             image= ImageIO.read(new File("images/"+NomImage));
-             } 
-         catch(Exception err) 
-             {
-            System.out.println(NomImage+" introuvable !");            
-            System.exit(0);    
-            }
+	    super();
+	     try {
+	         image= ImageIO.read(new File("images/"+NomImage));
+	         } 
+	     catch(Exception err) 
+	         {
+	        System.out.println(NomImage+" introuvable !");            
+	        System.exit(0);    
+        }
         this.type=type;
         
         h= image.getHeight(null);   
@@ -33,16 +33,31 @@ public class  Objet {
         x=ax;   
         y=ay;
         BoxObjet = new Rectangle(x,y,l,h);
+        BoxHaut = new Rectangle(x,y,l,1);
+        BoxBas = new Rectangle(x+h-1,y,l,1);
+        BoxGauche = new Rectangle(x,y,1,h);
+        BoxDroite = new Rectangle(x,y+l-1,1,h);
         vitesseX=vx;
         vitesseY=vy; 
         actif=true;
         
     }
-    
-    boolean Collision(Objet O) {
-        return BoxObjet.intersects(O.BoxObjet); 
+
+    boolean CollisionHaut(Objet O) {
+        return BoxHaut.intersects(O.BoxObjet); 
     }
-    
+
+    boolean CollisionBas(Objet O) {
+        return BoxBas.intersects(O.BoxObjet); 
+    }
+
+    boolean CollisionGauche(Objet O) {
+        return BoxGauche.intersects(O.BoxObjet); 
+    }
+
+    boolean CollisionDroite(Objet O) {
+        return BoxDroite.intersects(O.BoxObjet); 
+    }
     public void move(Rectangle Ecran) {
         x=x+vitesseX; 
         y=y+vitesseY;
