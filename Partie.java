@@ -142,9 +142,7 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 		if(game!=null)
 			 switch(e.getKeyCode()){
 			 case KeyEvent.VK_SPACE :
-				 game.persos[0].gravity=!game.persos[0].gravity;
-				 game.persos[0].saut=true;
-				 game.persos[0].tempsSaut=4;
+				 game.persos[0].jump();
 				 break;
 			}
 	}

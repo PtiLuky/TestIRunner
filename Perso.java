@@ -1,6 +1,7 @@
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -16,6 +17,7 @@ public class Perso extends Objet implements  ActionListener{
 	int tempsSaut;
 	boolean gravity=true;//true normale, false inversee     
     BufferedImage[] courseImg,sautImg,volImg,atteriImg;
+    BufferedImage[] courseRev,sautRev,volRev,atteriRev;
     Timer timer=new Timer(50,this);
     int temps;
     
@@ -27,6 +29,10 @@ public class Perso extends Objet implements  ActionListener{
 		sautImg=new BufferedImage[4];
 		volImg=new BufferedImage[3];
 		atteriImg=new BufferedImage[4];
+		courseRev=new BufferedImage[6];
+		sautRev=new BufferedImage[4];
+		volRev=new BufferedImage[3];
+		atteriRev=new BufferedImage[4];
         try {
         	for(int i=0;i<courseImg.length;i++)
         		courseImg[i]= ImageIO.read(new File("images/persos/run_mini"+type+"-"+(i+1)+".png"));
@@ -41,9 +47,51 @@ public class Perso extends Objet implements  ActionListener{
            System.exit(0);    
        }
         
+        /*
+        AffineTransform at = new AffineTransform();
+        // 4. translate it to the center of the component
+        at.translate(courseImg[0].getWidth() / 2, courseImg[0].getHeight() / 2);
+        // 3. do the actual rotation
+        // 2. just a scale because this image is big
+        at.scale(1,-1);
+        // 1. translate the object so that you rotate it around the 
+        //    center (easier :))
+        at.translate(-courseImg[0].getWidth(null)/2, -courseImg[0].getHeight(null)/2);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.drawImage(courses[0], at, null);
+		////////////////////////////
+        AffineTransform at = new AffineTransform();
+        at.translate(getWidth() / 2, getHeight() / 2);
+        at.scale(1, 0.1);
+        AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+    	for(int i=0;i<courseImg.length;i++)
+    		courseRev[i]=  scaleOp.filter(courseImg[i],null);
+    	for(int i=0;i<sautImg.length;i++)
+    		sautImg[i]= ImageIO.read(new File("images/persos/jump_mini"+type+"-"+(i+1)+".png"));
+    	for(int i=0;i<volImg.length;i++)
+    		volImg[i]= ImageIO.read(new File("images/persos/fly_mini"+type+"-"+(i+1)+".png"));
+    	for(int i=0;i<atteriImg.length;i++)
+    		atteriImg[i]= ImageIO.read(new File("images/persos/land_mini"+type+"-"+(i+1)+".png"));
+    		*/
+        
+        
         timer.start();
 	}
 
+	public void jump(){
+		 gravity=!gravity;
+		 saut=true;
+		 tempsSaut=4;
+	}
+	
+	public void land(){
+		
+		saut=false;
+		tempsLand=4;
+	}
+	
+	
+	
 	
 	
 	public void actionPerformed(ActionEvent e) {

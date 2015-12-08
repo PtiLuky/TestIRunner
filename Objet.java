@@ -33,10 +33,10 @@ public class  Objet {
         x=ax;   
         y=ay;
         BoxObjet = new Rectangle(x,y,l,h);
-        BoxHaut = new Rectangle(x,y,l,1);
-        BoxBas = new Rectangle(x+h-1,y,l,1);
-        BoxGauche = new Rectangle(x,y,1,h);
-        BoxDroite = new Rectangle(x,y+l-1,1,h);
+        BoxHaut = new Rectangle(x+l/4,y,l/2,1);
+        BoxBas = new Rectangle(x+l/4,y+h-1,l/2,1);
+        BoxGauche = new Rectangle(x,y+h/4,1,h/2);
+        BoxDroite = new Rectangle(x+l-1,y+h/4,1,h/2);
         vitesseX=vx;
         vitesseY=vy; 
         actif=true;
