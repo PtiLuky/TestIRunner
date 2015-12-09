@@ -61,7 +61,7 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 		} catch(Exception ex) {
 		    System.err.println(ex.getMessage());
 		}
-		/*
+		
 		//Creation des textes :
 		titre=new JLabel("Test I-Runner");
 		titre.setFont(font);
@@ -77,9 +77,6 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 		affichage.add(titre);
 		affichage.add(menuPlay);
 		affichage.add(menuQuit);
-		*/
-		affichage=new ChoixPerso(3,1,l,h);
-		
 		
 		setContentPane(affichage);
 		setVisible(true); 
@@ -127,10 +124,11 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 			else if(arg0.getSource()==menu3)
 				game=new Jeu(3,l,h);
 			else if(arg0.getSource()==menu4)
-				game=new Jeu(4,l,h);*/
+				game=new Jeu(4,l,h);
 			game=new Jeu(1,l,h);
 			affichage=game;
-			jeuEnCours=true;
+			jeuEnCours=true;*/
+			affichage=new ChoixPerso(2,0,l,h);
 			affichage.add(jeuQuit);
 			affichage.add(jeuMenu);
 			

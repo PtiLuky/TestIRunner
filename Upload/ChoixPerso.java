@@ -1,64 +1,73 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import javax.swing.JLabel;
 
-import javax.imageio.ImageIO;
-
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import javax.swing.*;
 
 public class ChoixPerso extends Menu{
-	Perso[]Joueur;
-	Bouton FlecheD1;
-	Bouton FlecheG1;
-	Bouton FlecheD2;
-	Bouton FlecheG2;
-	Bouton FlecheD3;
-	Bouton FlecheG3;
-	Bouton FlecheD4;
-	Bouton FlecheG4;
+	Perso[] joueur;
+	Bouton flecheD1;
+	Bouton flecheG1;
+	Bouton flecheD2;
+	Bouton flecheG2;
+	Bouton flecheD3;
+	Bouton flecheG3;
+	Bouton flecheD4;
+	Bouton flecheG4;
+	JLabel J1;
 	
 	//Constructeur
 	
 	public ChoixPerso (int nbrJ,int type,int l,int h){
 		super(type,l,h);
-		int nbJoueur = 3;
+		int nbJoueur = nbrJ; //on utilise le parametre passe ;)
 		
-		Joueur = new Perso[nbJoueur];
+		joueur = new Perso[nbJoueur];
 		for (int i=0; i<nbJoueur; i++){
-			Joueur[i] = new Perso(i+1,i,("Joueur " + i));
-			//Joueur[i].pseudo = ("Joueur " + i);
-			//Joueur[i].type = i;
-			//Joueur[i].joueur = i;
+			joueur[i] = new Perso(i+1,i+1,("Joueur " + (i+1)));  // qu'on commence au joueur 1 et pas 0
+			//Joueur[i].pseudo = ("Joueur " + (i+1));
+			//Joueur[i].type = i+1;
+			//Joueur[i].joueur = i+1;
 		}
+		affichageChoix(joueur);
 	}
 	
 	//Affichage
 	
-	public void affichageChoix (Perso[]Joueur){
-		
-		for(int j=0; j<= Joueur.length; j++){
-			JLabel J1 = new JLabel (Joueur[j].pseudo);
-			for(int k=0; k<= 1; k++){
+	public void affichageChoix (Perso[] Joueur){
+		for(int j=0; j< Joueur.length; j++){   //Strictement inferieur !
+			J1 = new JLabel (Joueur[j].pseudo);			//heu.. la les gars, votre boucle devient cheloue... normalement on a pas à sortir de la boucle, donc pas de k ou m,, vous restez avec j qui correspond à chaque joueur
+			//(donc en dessous normalement vous avez qu'un setBounds
+			/*for(int k=0; k<= 1; k++){
 				J1.setBounds(((760/3)-25),((k*1024/3)-25),50,50);
 			}
 			for(int m=0; m<= 3; m++){
 				J1.setBounds(((2*760/3)-25),((m*1024/3)-25),50,50);
-			}
+			}*/
 			this.add (J1);
 		}
 	}
 }
+
+
+
+/** SI VOUS VOULEZ CHANGER LA POLICE :  (importer java.awt.* ; ou java.awt.Font;
+Dans les var :
+
+Font font;
+
+///////////
+Dans le constructeur :
+
+try {
+    font = Font.createFont(Font.TRUETYPE_FONT, new File("policePerso.ttf")); 
+    font = font.deriveFont(38.f);
+} catch(Exception ex) {
+    System.err.println(ex.getMessage());
+}
+
+////////////////
+Et sur vos JLabel : 
+
+monJLabel.setFont(font);
+monJLabel.setForeground(new Color(222,124,124));
+
+
+*/
