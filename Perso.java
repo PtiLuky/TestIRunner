@@ -33,6 +33,7 @@ public class Perso extends Objet implements  ActionListener{
 		sautRev=new BufferedImage[4];
 		volRev=new BufferedImage[3];
 		atteriRev=new BufferedImage[4];
+		//generation des images droites
         try {
         	for(int i=0;i<courseImg.length;i++)
         		courseImg[i]= ImageIO.read(new File("images/persos/run_mini"+type+"-"+(i+1)+".png"));
@@ -47,34 +48,20 @@ public class Perso extends Objet implements  ActionListener{
            System.exit(0);    
        }
         
-        /*
-        AffineTransform at = new AffineTransform();
-        // 4. translate it to the center of the component
-        at.translate(courseImg[0].getWidth() / 2, courseImg[0].getHeight() / 2);
-        // 3. do the actual rotation
-        // 2. just a scale because this image is big
-        at.scale(1,-1);
-        // 1. translate the object so that you rotate it around the 
-        //    center (easier :))
-        at.translate(-courseImg[0].getWidth(null)/2, -courseImg[0].getHeight(null)/2);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(courses[0], at, null);
-		////////////////////////////
-        AffineTransform at = new AffineTransform();
-        at.translate(getWidth() / 2, getHeight() / 2);
-        at.scale(1, 0.1);
-        AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-    	for(int i=0;i<courseImg.length;i++)
-    		courseRev[i]=  scaleOp.filter(courseImg[i],null);
-    	for(int i=0;i<sautImg.length;i++)
-    		sautImg[i]= ImageIO.read(new File("images/persos/jump_mini"+type+"-"+(i+1)+".png"));
-    	for(int i=0;i<volImg.length;i++)
-    		volImg[i]= ImageIO.read(new File("images/persos/fly_mini"+type+"-"+(i+1)+".png"));
-    	for(int i=0;i<atteriImg.length;i++)
-    		atteriImg[i]= ImageIO.read(new File("images/persos/land_mini"+type+"-"+(i+1)+".png"));
-    		*/
         
-        
+        //generation des images miroir
+      	AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
+		tx.translate(0, -courseImg[0].getHeight(null));
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+    	for(int i=0;i<courseRev.length;i++)
+    		courseRev[i]= op.filter(courseImg[i], null);
+    	for(int i=0;i<sautRev.length;i++)
+    		sautRev[i]= op.filter(sautImg[i], null);
+    	for(int i=0;i<volRev.length;i++)
+    		volRev[i]= op.filter(volImg[i], null);
+    	for(int i=0;i<atteriRev.length;i++)
+    		atteriRev[i]= op.filter(atteriImg[i], null);
+		
         timer.start();
 	}
 
