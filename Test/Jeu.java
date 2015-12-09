@@ -17,7 +17,7 @@ public class Jeu extends JPanel implements ActionListener{
 	int hT=8; // hauteur terrain
 	Objet[][] terrain;
 	Perso[] persos;
-	int vitesseGravity=20;
+	int vitesseGravity=2;
 	
 	BufferedImage arrierePlan,fond;
 	Graphics buffer;
@@ -52,30 +52,27 @@ public class Jeu extends JPanel implements ActionListener{
 
 	public void gestionVitesse(){
 		for(int k=0;k<persos.length;k++){
+			boolean contactYH = false;
+			boolean contactYB = false;
+			boolean contactXD = false;
+			boolean contactXG = false;
 			for(int i=1; i<terrain.length; i++){
 				for(int j=1; j<terrain[i].length; j++){
-					boolean contactYH=persos[k].CollisionHaut(terrain[i][j]);
-					boolean contactYB=persos[k].CollisionBas(terrain[i][j]);
-					boolean contactXD=persos[k].CollisionDroite(terrain[i][j]);	
-					boolean contactXG=persos[k].CollisionGauche(terrain[i][j]);	
-					if(contactYB && persos[k].gravity == true){
-						persos[k].vitesseY=0;						
-					}
-					if (contactYB == false && persos[k].gravity == true){
-						persos[k].vitesseY = persos[k].vitesseY + vitesseGravity;						
-						}
-					if(contactYH && persos[k].gravity == false){
-						persos[k].vitesseY=0;
-					} 
-					if(contactYH == false && persos[k].gravity == false){
-						persos[k].vitesseY = persos[k].vitesseY - vitesseGravity;
-					}
-					if(contactXG || contactXD){
-						persos[k].vitesseX=0;
-						persos[k].vitesseY=0;
-					}
+					if(persos[k].CollisionBas(terrain[i][j]))
+						contactYB = true;	
+					if(persos[k].CollisionHaut(terrain[i][j]))
+						contactYH = true;
+					if(persos[k].CollisionGauche(terrain[i][j]))
+						contactXG = true;
+					if(persos[k].CollisionDroite(terrain[i][j]))
+						contactXD = true;
 				}
-				}			
+			}
+			if (contactYH || contactYB)
+				persos[k].vitesseY=0;
+			else 
+				persos[k].vitesseY=(persos[k].gravity)? vitesseGravity : -vitesseGravity;
+
 			persos[k].move(new Rectangle(0,0,l,h));
 		}
 	}
