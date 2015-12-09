@@ -17,7 +17,7 @@ public class Jeu extends JPanel implements ActionListener{
 	int hT=8; // hauteur terrain
 	Objet[][] terrain;
 	Perso[] persos;
-	int vitesseGravity=20;
+	int vitesseGravity=2;
 	
 	BufferedImage arrierePlan,fond;
 	Graphics buffer;
@@ -52,20 +52,28 @@ public class Jeu extends JPanel implements ActionListener{
 
 	public void gestionVitesse(){
 		for(int k=0;k<persos.length;k++){
-			boolean contactY=false;
-			boolean contactX=false;
-			/*for(int i=1;i<terrain.length;i++)
-			*/
-			if(contactY)
+			boolean contactYH = false;
+			boolean contactYB = false;
+			boolean contactXD = false;
+			boolean contactXG = false;
+			for(int i=1; i<terrain.length; i++){
+				for(int j=1; j<terrain[i].length; j++){
+					if(persos[k].CollisionBas(terrain[i][j]))
+						contactYB = true;	
+					if(persos[k].CollisionHaut(terrain[i][j]))
+						contactYH = true;
+					if(persos[k].CollisionGauche(terrain[i][j]))
+						contactXG = true;
+					if(persos[k].CollisionDroite(terrain[i][j]))
+						contactXD = true;
+				}
+			}
+			if (contactYH || contactYB)
 				persos[k].vitesseY=0;
-			else if(persos[k].gravity)
-				persos[k].vitesseY=vitesseGravity;
-			else
-				persos[k].vitesseY=-vitesseGravity;
-			
-			
+			else 
+				persos[k].vitesseY=(persos[k].gravity)? vitesseGravity : -vitesseGravity;
+
 			persos[k].move(new Rectangle(0,0,l,h));
-			
 		}
 	}
 	
@@ -88,8 +96,6 @@ public class Jeu extends JPanel implements ActionListener{
 		gestionVitesse();
 		repaint();
 	}
-
-
 
 	
 }
