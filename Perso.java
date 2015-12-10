@@ -23,7 +23,7 @@ public class Perso extends Objet implements  ActionListener{
     
 	
 	Perso(int type, int joueur, String pseudo){
-		super("/persos/run_mini"+type+"-1.png",'X',10,500,0,0);
+		super("/persos/run_mini"+type+"-1.png",'X',200,500,0,0);
 		this.type=type;
 		this.pseudo=pseudo;
 		courseImg=new BufferedImage[6];
@@ -66,15 +66,23 @@ public class Perso extends Objet implements  ActionListener{
         timer.start();
 	}
 
-	public void jump(){
-		 gravity=!gravity;
+	public void fly(){
 		 saut=true;
-		 tempsSaut=4;
+	}
+	public void jump(){
+		if(!saut){
+			 gravity=!gravity;
+			 tempsSaut=4;
+			 y=gravity?y+10:y-10;
+			 fly();
+		}
 	}
 	
 	public void land(){
-		saut=false;
-		tempsLand=4;
+		if(saut){
+			saut=false;
+			tempsLand=4;
+		}
 	}
 
 	public void up(){
@@ -104,13 +112,27 @@ public class Perso extends Objet implements  ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if(tempsSaut>0){
+		if(tempsSaut>0&&!gravity){
 			image=sautImg[4-tempsSaut];
 			tempsSaut--;
-		}else if(saut)
+		}else if(tempsSaut>0&&gravity){
+			image=sautRev[4-tempsSaut];
+			tempsSaut--;
+		}else if(tempsLand>0&&gravity){
+			image=atteriImg[4-tempsLand];
+			tempsLand--;
+		}else if(tempsLand>0&&!gravity){
+			image=atteriRev[4-tempsLand];
+			tempsLand--;
+		}else if(saut&&!gravity){
 			image=volImg[temps%volImg.length];
-		else
+		}else if(saut&&gravity){
+				image=volRev[temps%volRev.length];
+		}else if(gravity){
 			image=courseImg[temps%courseImg.length];
+		}else{
+			image=courseRev[temps%courseRev.length];
+		}
 		temps++;
 	}
 

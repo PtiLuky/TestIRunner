@@ -8,69 +8,25 @@
 abstract class Terrain {
 //genere un terrain pour le debut
 	public static void initTerrain(Objet[][] terrain){
-		int random;
-		char lettre;
+		int longueurDebut=9;
 		int i;
-		int j=0;
-		i=3;
-		terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
-		i=5;
-		terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
-
-		//case haut gauche :
-		i=1;
-		random=(int)(Math.random()*4);
-		if(random==0)
-			lettre='E';
-		else if(random==1)
-			lettre='F';
-		else if(random==2)
-			lettre='H';
-		else
-			lettre='I';
-		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j,96*i,0,0);
-		
-		//seconde case haut :
-		i=2;
-		if(terrain[i-1][0].type=='H'||terrain[i-1][0].type=='I')
-			lettre='O';
-		else if(terrain[i-1][0].type=='F')
-			lettre='I';
-		else{
-			random=(int)(Math.random()*2);
-			if(random==0)
-				lettre='H';
-			else
-				lettre='I';
+		for(int j=0;j<longueurDebut;j++){
+			i=1;
+			terrain[i][j]=new Objet("tiles/H.png",'H',96*j,96*i,0,0);
+			i=2;
+			terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
+			i=3;
+			terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
+			i=4;
+			terrain[i][j]=new Objet("tiles/K.png",'K',96*j,96*i,0,0);
+			i=5;
+			terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
+			i=6;
+			terrain[i][j]=new Objet("tiles/O.png",'O',96*j,96*i,0,0);
+			i=7;
+			terrain[i][j]=new Objet("tiles/B.png",'B',96*j,96*i,0,0);
 		}
-		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j,96*i,0,0);
-		
-		//case bas gauche :
-		i=7;
-		random=(int)(Math.random()*2);
-		lettre=(random==0)?'B':'C';
-		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j,96*i,0,0);
-		
-		//seconde case bas : vide pour demarrer :
-		i=6;
-		lettre='O';
-		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j,96*i,0,0);
-		
-		//case centre :
-		i=4;
-		random=(int)(Math.random()*4);
-		if(random==0)
-			lettre='J';
-		else if(random==1)
-			lettre='K';
-		else if(random==2)
-			lettre='L';
-		else
-			lettre='O';
-
-		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j,96*i,0,0);
-		
-		for(int k=1;k<terrain[0].length;k++)
+		for(int k=longueurDebut;k<terrain[0].length;k++)
 			generTerrain(terrain,k,0);
 	}
 	
