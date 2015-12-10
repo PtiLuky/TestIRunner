@@ -25,6 +25,7 @@ public class Perso extends Objet implements  ActionListener{
 	Perso(int type, int joueur, String pseudo){
 		super("/persos/run_mini"+type+"-1.png",'X',10,500,0,0);
 		this.type=type;
+		this.pseudo=pseudo;
 		courseImg=new BufferedImage[6];
 		sautImg=new BufferedImage[4];
 		volImg=new BufferedImage[3];
@@ -72,12 +73,33 @@ public class Perso extends Objet implements  ActionListener{
 	}
 	
 	public void land(){
-		
 		saut=false;
 		tempsLand=4;
 	}
-	
-	
+
+	public void up(){
+		vitesseY=-20;
+		move();
+		vitesseY=0;
+	}
+
+	public void down(){
+		vitesseY=20;
+		move();
+		vitesseY=0;
+	}
+
+	public void right(){
+		vitesseX=10;
+		move();
+		vitesseX=0;
+	}
+
+	public void left(){
+		vitesseX=-10;
+		move();
+		vitesseX=0;
+	}
 	
 	
 	
@@ -89,7 +111,6 @@ public class Perso extends Objet implements  ActionListener{
 			image=volImg[temps%volImg.length];
 		else
 			image=courseImg[temps%courseImg.length];
-		
 		temps++;
 	}
 

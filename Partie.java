@@ -108,6 +108,8 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 			
 		//GoTo Menu principal
 		}else if(arg0.getSource()==menuMenu||arg0.getSource()==jeuMenu){
+			if(game!=null)
+				game.stop();
 			jeuEnCours=false;
 			affichage=new Menu(0,l,h);
 			affichage.add(menuPlay);
@@ -128,6 +130,7 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 			game=new Jeu(1,l,h);
 			affichage=game;
 			jeuEnCours=true;
+			//affichage=new ChoixPerso(2,0,l,h);
 			affichage.add(jeuQuit);
 			affichage.add(jeuMenu);
 			
@@ -143,6 +146,18 @@ public class Partie extends JFrame implements ActionListener, KeyListener{
 			 switch(e.getKeyCode()){
 			 case KeyEvent.VK_SPACE :
 				 game.persos[0].jump();
+				 break;
+			 case KeyEvent.VK_UP :
+				 game.persos[0].up();
+				 break;
+			 case KeyEvent.VK_DOWN :
+				 game.persos[0].down();
+				 break;
+			 case KeyEvent.VK_RIGHT :
+				 game.persos[0].right();
+				 break;
+			 case KeyEvent.VK_LEFT :
+				 game.persos[0].left();
 				 break;
 			}
 	}

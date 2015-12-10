@@ -33,38 +33,45 @@ public class  Objet {
         x=ax;   
         y=ay;
         BoxObjet = new Rectangle(x,y,l,h);
-        BoxHaut = new Rectangle(x+l/4,y,l/2,1);
-        BoxBas = new Rectangle(x+l/4,y+h-1,l/2,1);
-        BoxGauche = new Rectangle(x,y+h/4,1,h/2);
-        BoxDroite = new Rectangle(x+l-1,y+h/4,1,h/2);
+        BoxHaut = new Rectangle(x,y-1,l,1);
+        BoxBas = new Rectangle(x,y+h,l,1);
+        BoxGauche = new Rectangle(x-1,y+10,1,h-20);
+        BoxDroite = new Rectangle(x+l,y+10,1,h-20);
         vitesseX=vx;
         vitesseY=vy; 
         actif=true;
         
     }
 
-    boolean CollisionHaut(Objet O) {
-        return BoxHaut.intersects(O.BoxObjet); 
+    public boolean CollisionHaut(Objet O) {
+      return (BoxHaut.intersects(O.BoxObjet));
     }
 
-    boolean CollisionBas(Objet O) {
+    public boolean CollisionBas(Objet O) {
         return BoxBas.intersects(O.BoxObjet); 
     }
 
-    boolean CollisionGauche(Objet O) {
+    public boolean CollisionGauche(Objet O) {
         return BoxGauche.intersects(O.BoxObjet); 
     }
 
-    boolean CollisionDroite(Objet O) {
+    public boolean CollisionDroite(Objet O) {
         return BoxDroite.intersects(O.BoxObjet); 
     }
-    public void move(Rectangle Ecran) {
+
+    public boolean Collision(Objet O) {
+        return BoxObjet.intersects(O.BoxObjet); 
+    }
+    public void move() {
         x=x+vitesseX; 
         y=y+vitesseY;
-        
+
         BoxObjet.setLocation(x,y);
+        BoxHaut.setLocation(x,y-1);
+        BoxBas.setLocation(x,y+h);
+        BoxGauche.setLocation(x-1,y+10);
+        BoxDroite.setLocation(x+l,y+10);
         
-        if (( x + l<0)||( y + h<0)||( x > Ecran.width) ||( y > Ecran.height)) actif=false;
     }
     
 }
