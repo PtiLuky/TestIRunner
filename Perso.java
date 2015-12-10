@@ -79,7 +79,7 @@ public class Perso extends Objet implements  ActionListener{
 	}
 	
 	public void land(){
-		if(saut){
+		if(saut&&tempsSaut==0){ // pour eviter de compter le contact au moment du saut
 			saut=false;
 			tempsLand=4;
 		}

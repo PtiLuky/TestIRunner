@@ -24,7 +24,7 @@ public class Jeu extends JPanel implements ActionListener{
 	Timer timer= new Timer(50,this);
 	
 	public Jeu(int nbJoueurs,int l,int h){
-		vitesse=10;
+		vitesse=5;
 
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
 		buffer = arrierePlan.getGraphics();
@@ -78,9 +78,10 @@ public class Jeu extends JPanel implements ActionListener{
 			}else {
 				persos[k].vitesseY=(persos[k].gravity)? vitesseGravity : -vitesseGravity;
 				persos[k].fly();
-			}if(contactXD||contactXG)
+			}if(contactXD||contactXG){
 				persos[k].vitesseX=-vitesse; //se fait emporter par le terrain
-			
+			}else
+				persos[k].vitesseX=0;
 			persos[k].move();
 		}
 	}
