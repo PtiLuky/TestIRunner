@@ -7,6 +7,11 @@
 
 abstract class Terrain {
 //genere un terrain pour le debut
+	
+/**
+ * Cree le debut du terrain - simple pour demarrer 
+ * @param terrain : terrain a modifier
+ */
 	public static void initTerrain(Objet[][] terrain){
 		int longueurDebut=9;
 		int i;
@@ -30,7 +35,10 @@ abstract class Terrain {
 			generTerrain(terrain,k,0);
 	}
 	
-//actualise le terrain
+/**
+ * met a jour le terrain et decale tout si besoin
+ * @param terrain : terrain a modifier
+ */
 	public static void gestionTerrain(Objet[][] terrain){
 		if(terrain[1][1].x<0){ // si une colonne est entierement cachee
 			for(int j=0;j<terrain[0].length-1;j++)
@@ -40,7 +48,12 @@ abstract class Terrain {
 		}
 	}
 	
-//genere la colonne j en fonction de la colonne j-1
+/**
+ * genere une colonne du terrain en fonction de la precedente
+ * @param terrain : terrain a modifier
+ * @param j : 0<j<11, colonne a creer
+ * @param decal : decalage de l'abscisse de la colonne
+ */
 	public static void generTerrain(Objet[][] terrain,int j,int decal){ 
 		int random;
 		char lettre;
@@ -92,22 +105,17 @@ abstract class Terrain {
 				lettre=(random<2)?'H':'I';
 			}else if(terrain[i][j-1].type=='I'||terrain[i][j-1].type=='F')
 				lettre='O';
-			else
-				System.out.print("Pas normal1");
 		}else if(terrain[i+1][j].type=='G'||terrain[i+1][j].type=='N'){
 			if(terrain[i][j-1].type=='O')
 				lettre='D';
 			else if(terrain[i][j-1].type=='G'||terrain[i][j-1].type=='H')
 					lettre='E';
-			else
-				System.out.print("Pas normal2");
 		}else if(terrain[i+1][j].type=='H')
 			lettre='E';
 		else if(terrain[i+1][j].type=='I'){
 			random=(int)(Math.random()*3);
 			lettre=(random<2)?'E':'F';
-		}else
-			System.out.print("Pas normal3");
+		}
 		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j+decal,96*i,0,0);
 
 //seconde bas :
@@ -139,22 +147,17 @@ abstract class Terrain {
 				lettre=(random<2)?'B':'C';
 			}else if(terrain[i][j-1].type=='C'||terrain[i][j-1].type=='F')
 				lettre='O';
-			else
-				System.out.print("Pas normal1");
 		}else if(terrain[i-1][j].type=='A'||terrain[i-1][j].type=='M'){
 			if(terrain[i][j-1].type=='O')
 				lettre='D';
 			else if(terrain[i][j-1].type=='A'||terrain[i][j-1].type=='B')
 					lettre='E';
-			else
-				System.out.print("Pas normal2");
 		}else if(terrain[i-1][j].type=='B')
 			lettre='E';
 		else if(terrain[i-1][j].type=='C'){
 			random=(int)(Math.random()*3);
 			lettre=(random<2)?'E':'F';
-		}else
-			System.out.print("Pas normal3");
+		}
 		terrain[i][j]=new Objet("tiles/"+lettre+".png",lettre,96*j+decal,96*i,0,0);
 		
 	}

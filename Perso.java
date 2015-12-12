@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
@@ -10,19 +11,26 @@ import javax.swing.Timer;
 
 
 public class Perso extends Objet implements  ActionListener{
-	int type,joueur;
+	int type;
 	String pseudo;
+	
 	boolean saut; //0 course, 1 saut
 	int tempsLand;
 	int tempsSaut;
+	int vitessePropre;
 	boolean gravity=true;//true normale, false inversee     
     BufferedImage[] courseImg,sautImg,volImg,atteriImg;
     BufferedImage[] courseRev,sautRev,volRev,atteriRev;
     Timer timer=new Timer(50,this);
+    boolean alive=true;
     int temps;
     
-	
-	Perso(int type, int joueur, String pseudo){
+/**
+ * Constructeur d'un perso
+ * @param type couleur du perso, entre 1 et 6
+ * @param pseudo Pseudo associe au perso
+ */
+	Perso(int type, String pseudo){
 		super("/persos/run_mini"+type+"-1.png",'X',200,500,0,0);
 		this.type=type;
 		this.pseudo=pseudo;
@@ -65,10 +73,15 @@ public class Perso extends Objet implements  ActionListener{
 		
         timer.start();
 	}
-
+/**
+ * genere l'animation de vol
+ */
 	public void fly(){
 		 saut=true;
 	}
+/**
+ * genere l'animation de saut avec un petit decollage pour enlever le contact avec le sol
+ */
 	public void jump(){
 		if(!saut){
 			 gravity=!gravity;
@@ -77,63 +90,74 @@ public class Perso extends Objet implements  ActionListener{
 			 fly();
 		}
 	}
-	
+/**
+ * genre l'animation d'atterissage et excluant les cas de decollage (contact + saut aussi respectes pendant le decollage)
+ */
 	public void land(){
-		if(saut&&tempsSaut==0){ // pour eviter de compter le contact au moment du saut
+		if(saut&&tempsSaut==0){
 			saut=false;
 			tempsLand=4;
 		}
 	}
-
-	public void up(){
-		vitesseY=-20;
-		move();
-		vitesseY=0;
+/**
+ * petite acceleration du perso
+ */
+	public void faster(){
+		if(!saut&&vitessePropre<10){
+			vitessePropre+=2;
+		}
 	}
-
-	public void down(){
-		vitesseY=20;
-		move();
-		vitesseY=0;
+/**
+ * ralentir le perso
+ */
+	public void slower(){
+		if(!saut)
+			vitessePropre=-5;
 	}
-
-	public void right(){
-		vitesseX=10;
-		move();
-		vitesseX=0;
+/**
+ * le remettre le perso a la vitesse initiale
+ */
+	public void vitesseNeutre(){
+		vitessePropre=0;
 	}
-
-	public void left(){
-		vitesseX=-10;
-		move();
-		vitesseX=0;
+/**
+ * verifie que le perso est toujours en vie
+ * @param r : un rectangle correspondant a la taille du terrain
+ */
+	public void checkAlive(Rectangle r){
+		if(!BoxObjet.intersects(r)){
+			alive=false;
+		}
 	}
-	
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if(tempsSaut>0&&!gravity){
-			image=sautImg[4-tempsSaut];
-			tempsSaut--;
-		}else if(tempsSaut>0&&gravity){
-			image=sautRev[4-tempsSaut];
-			tempsSaut--;
-		}else if(tempsLand>0&&gravity){
-			image=atteriImg[4-tempsLand];
-			tempsLand--;
-		}else if(tempsLand>0&&!gravity){
-			image=atteriRev[4-tempsLand];
-			tempsLand--;
-		}else if(saut&&!gravity){
-			image=volImg[temps%volImg.length];
-		}else if(saut&&gravity){
-				image=volRev[temps%volRev.length];
-		}else if(gravity){
-			image=courseImg[temps%courseImg.length];
-		}else{
-			image=courseRev[temps%courseRev.length];
-		}
-		temps++;
+		if(alive){
+			//On assigne la bonne image en fonction de l'etat du perso
+			if(tempsSaut>0&&!gravity){
+				image=sautImg[4-tempsSaut];
+				tempsSaut--;
+			}else if(tempsSaut>0&&gravity){
+				image=sautRev[4-tempsSaut];
+				tempsSaut--;
+			}else if(tempsLand>0&&gravity){
+				image=atteriImg[4-tempsLand];
+				tempsLand--;
+			}else if(tempsLand>0&&!gravity){
+				image=atteriRev[4-tempsLand];
+				tempsLand--;
+			}else if(saut&&!gravity){
+				image=volImg[temps%volImg.length];
+			}else if(saut&&gravity){
+					image=volRev[temps%volRev.length];
+			}else if(gravity){
+				image=courseImg[temps%courseImg.length];
+			}else{
+				image=courseRev[temps%courseRev.length];
+			}
+			temps++;
+		}else
+			timer.stop();
 	}
 
 

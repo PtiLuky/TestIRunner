@@ -18,13 +18,16 @@ public class Jeu extends JPanel implements ActionListener{
 	Objet[][] terrain;
 	Perso[] persos;
 	int vitesseGravity=10;
+	Partie contener;
+	Bouton jeuMenu,jeuQuit;
 	
 	BufferedImage arrierePlan,fond;
 	Graphics buffer;
 	Timer timer= new Timer(50,this);
 	
-	public Jeu(int nbJoueurs,int l,int h){
-		vitesse=5;
+	public Jeu(int nbJoueurs,int l,int h,Partie contener){
+		vitesse=10;
+		this.contener=contener;
 
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
 		buffer = arrierePlan.getGraphics();
@@ -42,47 +45,51 @@ public class Jeu extends JPanel implements ActionListener{
 		
         persos= new Perso[nbJoueurs];
         for(int i=0;i<nbJoueurs;i++)
-        	persos[i]=new Perso(3,1,"test");
+        	persos[i]=new Perso(3,"test");
         
 		terrain=new Objet[hT][lT];
 		Terrain.initTerrain(terrain);
+		
+		jeuQuit = new Bouton("quitter-mini", l-94,10);
+		jeuQuit.addActionListener(this);
+		jeuMenu = new Bouton("menu-mini", 74,10);
+		jeuMenu.addActionListener(this);
+		add(jeuQuit);
+		add(jeuMenu);
 		
 		timer.start();
 	}
 	
 	public void gestionVitesse(){
 		for(int k=0;k<persos.length;k++){	//pour chaque perso
-			boolean contactYH = false;
-			boolean contactYB = false;
-			boolean contactXD = false;
-			boolean contactXG = false;
-			for(int i=1; i<terrain.length; i++)
-				for(int j=0; j<terrain[i].length; j++)
-					if(terrain[i][j].type!='O'){				//on teste pas les cases vides 
-						if(persos[k].CollisionHaut(terrain[i][j]))
-							contactYH = true;
-						if(persos[k].CollisionBas(terrain[i][j]))
-							contactYB = true;	
-						if(persos[k].CollisionGauche(terrain[i][j])){
-							contactXG = true;
-							System.out.println("gauche");
+			if(persos[k].alive){
+				boolean contactYH = false;
+				boolean contactYB = false;
+				boolean contactXD = false;
+				for(int i=1; i<terrain.length; i++)
+					for(int j=0; j<terrain[i].length; j++)
+						if(terrain[i][j].type!='O'){				//on teste pas les cases vides 
+							if(persos[k].CollisionHaut(terrain[i][j]))
+								contactYH = true;
+							if(persos[k].CollisionBas(terrain[i][j]))
+								contactYB = true;
+							if(persos[k].CollisionDroite(terrain[i][j]))
+								contactXD = true;
 						}
-						if(persos[k].CollisionDroite(terrain[i][j])){
-							contactXD = true;
-							System.out.println("droite");
-						}
-					}
-			if (contactYH || contactYB){
-				persos[k].vitesseY=0;
-				persos[k].land();
-			}else {
-				persos[k].vitesseY=(persos[k].gravity)? vitesseGravity : -vitesseGravity;
-				persos[k].fly();
-			}if(contactXD||contactXG){
-				persos[k].vitesseX=-vitesse; //se fait emporter par le terrain
-			}else
-				persos[k].vitesseX=0;
-			persos[k].move();
+				
+				persos[k].move();
+			}
+			persos[k].checkAlive(new Rectangle(0,96+64,l,h-2*96));
+		}
+	}
+
+	public void gestionFin(){
+		boolean fini=true;
+		for(int k=0;k<persos.length;k++)	//pour chaque perso
+			if(persos[k].alive)
+				fini=false;
+		if(fini){
+			stop();
 		}
 	}
 	
@@ -103,14 +110,25 @@ public class Jeu extends JPanel implements ActionListener{
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		for(int j=0;j<terrain[0].length;j++) //chaque colonne
-			for(int i=1;i<terrain.length;i++){//les lignes sans faire la 1ere
-				terrain[i][j].vitesseX=-vitesse;
-				terrain[i][j].move();
-			}
-		Terrain.gestionTerrain(terrain);
-		gestionVitesse();
-		repaint();
+		if(e.getSource()==timer){
+			for(int j=0;j<terrain[0].length;j++) //chaque colonne
+				for(int i=1;i<terrain.length;i++){//les lignes sans faire la 1ere
+					terrain[i][j].vitesseX=-vitesse;
+					terrain[i][j].move();
+				}
+			Terrain.gestionTerrain(terrain);
+			gestionVitesse();
+			gestionFin();
+			repaint(); 
+	//GoTo close
+		}else if(e.getSource()==jeuQuit)
+			 System.exit (0);
+	//GoTo Menu principal
+		else if(e.getSource()==jeuMenu){	
+			stop();
+			contener.setContentPane(new Menu(0,l,h,contener));
+			contener.setVisible(true);  
+		}
 	}
 
 	

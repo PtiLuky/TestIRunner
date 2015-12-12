@@ -12,17 +12,21 @@ public class  Objet {
     int vitesseX, vitesseY;          
     BufferedImage image;    
     Rectangle BoxObjet,BoxHaut,BoxBas,BoxGauche,BoxDroite; 
-    char type;
-    boolean actif;          
+    char type;     
    
-    // Constructeur
+/**
+ * Constructeur d'objet
+ * @param NomImage : scr de l'image
+ * @param type : 'A'-'O'= tiles du terrain, 'X' = un perso;
+ * @param ax : abscisse;
+ * @param ay : ordonee;
+ * @param vx : vitesse X;
+ * @param vy : vitesse Y;
+ */
     public Objet(String NomImage, char type,int ax, int ay, int vx, int vy)    {
-	    super();
 	     try {
 	         image= ImageIO.read(new File("images/"+NomImage));
-	         } 
-	     catch(Exception err) 
-	         {
+         }catch(Exception err){
 	        System.out.println(NomImage+" introuvable !");            
 	        System.exit(0);    
         }
@@ -33,35 +37,44 @@ public class  Objet {
         x=ax;   
         y=ay;
         BoxObjet = new Rectangle(x,y,l,h);
-        BoxHaut = new Rectangle(x,y-1,l,1);
-        BoxBas = new Rectangle(x,y+h,l,1);
+        BoxHaut = new Rectangle(x,y-1,l-20,1);
+        BoxBas = new Rectangle(x,y+h,l-20,1);
         BoxGauche = new Rectangle(x-1,y+10,1,h-20);
         BoxDroite = new Rectangle(x+l,y+10,1,h-20);
         vitesseX=vx;
-        vitesseY=vy; 
-        actif=true;
-        
+        vitesseY=vy;
     }
-
+/**
+ * @param O objet2
+ * @return si le haut de this touche objet2
+ */
     public boolean CollisionHaut(Objet O) {
       return (BoxHaut.intersects(O.BoxObjet));
     }
-
+/**
+ * @param O objet2
+ * @return si le bas de this touche objet2
+ */
     public boolean CollisionBas(Objet O) {
         return BoxBas.intersects(O.BoxObjet); 
     }
-
-    public boolean CollisionGauche(Objet O) {
-        return BoxGauche.intersects(O.BoxObjet); 
-    }
-
+/**
+ * @param O objet2
+ * @return si la droite de this touche objet2
+ */
     public boolean CollisionDroite(Objet O) {
         return BoxDroite.intersects(O.BoxObjet); 
     }
-
+/**
+ * @param O objet2
+ * @return si this touche objet2
+ */
     public boolean Collision(Objet O) {
         return BoxObjet.intersects(O.BoxObjet); 
     }
+/**
+ * met a jour la position avec la vitesse
+ */
     public void move() {
         x=x+vitesseX; 
         y=y+vitesseY;

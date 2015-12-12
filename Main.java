@@ -4,6 +4,7 @@ public class Main {
 		int l=1024;
 		int h=768;
 		new Partie(l,h);
+		
 	}
 
 }
