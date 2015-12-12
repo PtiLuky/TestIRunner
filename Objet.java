@@ -11,7 +11,8 @@ public class  Objet {
     int h,l;                
     int vitesseX, vitesseY;          
     BufferedImage image;    
-    Rectangle BoxObjet,BoxHaut,BoxBas,BoxGauche,BoxDroite; 
+    Rectangle BoxObjet;
+    private Rectangle BoxHaut,BoxBas,BoxGauche,BoxDroite; 
     char type;     
    
 /**

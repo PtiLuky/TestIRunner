@@ -1,32 +1,40 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 public class Menu extends JPanel implements MouseListener, ActionListener{
-	Image[] courses;
-	int type,l,h;
-	BufferedImage arrierePlan,fond;
-	Graphics buffer;
-	int nbrCourses=6;
-	int decalageImage=0;
-	Partie contener;
+	private Image[] courses;
+	private int type,l,h;
+	private BufferedImage arrierePlan,fond;
+	private Graphics buffer;
+	private int nbrCourses=6;
+	private int decalageImage=0;
+	private Partie contener;
 	//grands boutons
-	Bouton menuPlay,menuQuit,/*menuOption,*/menu2,menu3,menu4,menuMenu;
+	private Bouton menuPlay,menuQuit,/*menuOption,*/menu2,menu3,menu4;
 	//boutons mini
-	Bouton jeuMenu,jeuQuit;
-	JPanel affichage;
-	JLabel titre,nbrJoueurs;
-	Font font;
+	private Bouton jeuMenu,jeuQuit;
+	private JLabel titre;
+	private JTextArea text;
+	private Font font;
 	
 /**
  * Cree un menu
- * @param type : 0 = accueil, 1= nbr joueurs, 2=vide
+ * @param type : -1 = vide, 0 = accueil, 1= nbr joueurs, 2=regles
  * @param l : largeur
  * @param h : hauteur
  * @param contener : conteneur global
@@ -62,9 +70,11 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			creerMenuAccueil();
 		else if(type==1)
 			creerMenuChoixNombre();
+		else if(type==2)
+			creerMenuRegles();
 	}
 /**
- * Cree le menu de type 1
+ * Cree le menu de type 0
  */
 	private void creerMenuAccueil(){
 		menuPlay = new Bouton("Jouer", l/2,200);
@@ -75,19 +85,19 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		add(menuQuit);
 		titre=new JLabel("Test I-Runner");
 		titre.setFont(font);
-		titre.setForeground(new Color(222,124,124));
+		titre.setForeground(new Color(235,104,104));
 		titre.setBounds(l/2-170,10,340,100);
 		add(titre);
 	}
 /**
- * Cree le menu de type 2
+ * Cree le menu de type 1
  */
 	private void creerMenuChoixNombre(){
-		nbrJoueurs=new JLabel("Nombre de joueurs :");
-		nbrJoueurs.setFont(font);
-		nbrJoueurs.setForeground(new Color(222,124,124));
-		nbrJoueurs.setBounds(l/2-240,10,480,100);
-		add(nbrJoueurs);
+		titre=new JLabel("Nombre de joueurs :");
+		titre.setFont(font);
+		titre.setForeground(new Color(235,104,104));
+		titre.setBounds(l/2-240,10,480,100);
+		add(titre);
 		menu2 = new Bouton("2-", l/2,120);
 		menu2.addActionListener(this);
 		menu3 = new Bouton("3-", l/2,280);
@@ -97,6 +107,35 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		add(menu2);
 		add(menu3);
 		add(menu4);
+		jeuQuit = new Bouton("quitter-mini", l-94,10);
+		jeuQuit.addActionListener(this);
+		jeuMenu = new Bouton("menu-mini", 74,10);
+		jeuMenu.addActionListener(this);
+		add(jeuQuit);
+		add(jeuMenu);
+	}
+/**
+ * Cree le menu de type 2
+ */
+	private void creerMenuRegles(){
+		titre=new JLabel("Règles :");
+		titre.setFont(font);
+		titre.setForeground(new Color(235,104,104));
+		titre.setBounds(l/2-240,10,480,100);
+		add(titre);
+		text=new JTextArea("Le but est simple : le dernier joueur en vie sur le\n"
+				+ " terrain gagne.\n\n"
+				+ "Touches :\n"
+				+ "Joueur 1 : ralentir A ; sauter Z ; accelerer E\n"
+				+ "Joueur 2 : ralentir C ; sauter V ; accelerer B\n"
+				+ "Joueur 3 : ralentir K ; sauter L ; accelerer M\n"
+				+ "Joueur 4 : ralentir 7 ; sauter 8 ; accelerer 9\n");
+		text.setFont(font.deriveFont(24.f));
+		text.setEditable(false);
+		text.setOpaque(false);
+		text.setForeground(new Color(235,104,104));
+		text.setBounds(l/2-400,120,800,600);
+		add(text);
 		jeuQuit = new Bouton("quitter-mini", l-94,10);
 		jeuQuit.addActionListener(this);
 		jeuMenu = new Bouton("menu-mini", 74,10);
@@ -142,12 +181,15 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			contener.setVisible(true);  
 	//GoTo game
 		}else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
+			int[]test2={1,2};
+			int[]test3={1,2,3};
+			int[]test4={1,2,3,4};
 			if(arg0.getSource()==menu2)
-				contener.game=new Jeu(2,l,h,contener);
+				contener.game=new Jeu(test2,l,h,contener);
 			else if(arg0.getSource()==menu3)
-				contener.game=new Jeu(3,l,h,contener);
+				contener.game=new Jeu(test3,l,h,contener);
 			else if(arg0.getSource()==menu4)
-				contener.game=new Jeu(4,l,h,contener);
+				contener.game=new Jeu(test4,l,h,contener);
 			contener.setContentPane(contener.game);
 			contener.setVisible(true); 
 		}

@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 
 public class Bouton extends JButton implements MouseListener{
-	BufferedImage imgNeutre, imgUp, imgReleased, imgActuelle;
+	private BufferedImage imgNeutre, imgUp, imgReleased, imgActuelle;
 	int x,y,l,h;
 /**
  * Cree un bouton dont les images sont personnalisees, sans bord

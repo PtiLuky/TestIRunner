@@ -14,24 +14,25 @@ public class Perso extends Objet implements  ActionListener{
 	int type;
 	String pseudo;
 	
-	boolean saut; //0 course, 1 saut
-	int tempsLand;
-	int tempsSaut;
+	private boolean saut; //0 course, 1 saut
+	private int tempsLand;
+	private int tempsSaut;
 	int vitessePropre;
 	boolean gravity=true;//true normale, false inversee     
-    BufferedImage[] courseImg,sautImg,volImg,atteriImg;
-    BufferedImage[] courseRev,sautRev,volRev,atteriRev;
+	private BufferedImage[] courseImg,sautImg,volImg,atteriImg;
+	private BufferedImage[] courseRev,sautRev,volRev,atteriRev;
     Timer timer=new Timer(50,this);
     boolean alive=true;
-    int temps;
+    private int temps;
     
 /**
  * Constructeur d'un perso
  * @param type couleur du perso, entre 1 et 6
  * @param pseudo Pseudo associe au perso
  */
-	Perso(int type, String pseudo){
-		super("/persos/run_mini"+type+"-1.png",'X',200,500,0,0);
+	public Perso(int type, String pseudo,int x,int y, boolean gravity){
+		super("/persos/run_mini"+type+"-1.png",'X',x,y,0,0);
+		this.gravity=gravity;
 		this.type=type;
 		this.pseudo=pseudo;
 		courseImg=new BufferedImage[6];

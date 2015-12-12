@@ -54,7 +54,7 @@ abstract class Terrain {
  * @param j : 0<j<11, colonne a creer
  * @param decal : decalage de l'abscisse de la colonne
  */
-	public static void generTerrain(Objet[][] terrain,int j,int decal){ 
+	private static void generTerrain(Objet[][] terrain,int j,int decal){ 
 		int random;
 		char lettre;
 		int i;
