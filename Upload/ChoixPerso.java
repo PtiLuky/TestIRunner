@@ -21,7 +21,7 @@ public class ChoixPerso extends Menu{
 		
 		joueur = new Perso[nbJoueur];
 		for (int i=0; i<nbJoueur; i++){
-			joueur[i] = new Perso(i+1,("Joueur " + (i+1)));  // qu'on commence au joueur 1 et pas 0
+			joueur[i] = new Perso(i+1,("Joueur " + (i+1)),100,100,true);  // qu'on commence au joueur 1 et pas 0
 			//Joueur[i].pseudo = ("Joueur " + (i+1));
 			//Joueur[i].type = i+1;
 			//Joueur[i].joueur = i+1;
