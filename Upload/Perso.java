@@ -21,9 +21,9 @@ public class Perso extends Objet implements  ActionListener{
 	boolean gravity=true;//true normale, false inversee     
 	private BufferedImage[] courseImg,sautImg,volImg,atteriImg;
 	private BufferedImage[] courseRev,sautRev,volRev,atteriRev;
-    Timer timer=new Timer(50,this);
+    Timer timer=new Timer(50,this); //timer des animations de perso
     boolean alive=true;
-    public int temps;
+    int temps;
     
 /**
  * Constructeur d'un perso
@@ -104,8 +104,8 @@ public class Perso extends Objet implements  ActionListener{
  * petite acceleration du perso
  */
 	public void faster(){
-		if(!saut&&vitessePropre<10){
-			vitessePropre+=2;
+		if(!saut&&vitessePropre<5){
+			vitessePropre+=1;
 		}
 	}
 /**
@@ -113,7 +113,7 @@ public class Perso extends Objet implements  ActionListener{
  */
 	public void slower(){
 		if(!saut)
-			vitessePropre=-5;
+			vitessePropre=-3;
 	}
 /**
  * le remettre le perso a la vitesse initiale

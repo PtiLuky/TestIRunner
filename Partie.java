@@ -23,9 +23,11 @@ public class Partie extends JFrame implements KeyListener{
 		setContentPane(new Menu(0,l,h,this));
 		//setContentPane(new ChoixPerso(2,-1,l,h,this));
 		setVisible(true); 
+		
 		setFocusable(true);
 		requestFocusInWindow();
-		this.addKeyListener(this);
+		addKeyListener(this);
+		
 		
 	}
 	
@@ -83,6 +85,14 @@ public class Partie extends JFrame implements KeyListener{
 		if(game!=null)
 			 if(e.getKeyCode()==KeyEvent.VK_A || e.getKeyCode()==KeyEvent.VK_E)
 				 game.persos[0].vitesseNeutre();
+			 else if(e.getKeyCode()==KeyEvent.VK_C || e.getKeyCode()==KeyEvent.VK_B)
+				 game.persos[1].vitesseNeutre();
+			 else if (game.persos.length>2)
+				if(e.getKeyCode()==KeyEvent.VK_K || e.getKeyCode()==KeyEvent.VK_M)
+					 game.persos[2].vitesseNeutre();
+				else if (game.persos.length>3)
+					if(e.getKeyCode()==KeyEvent.VK_NUMPAD7 || e.getKeyCode()==KeyEvent.VK_NUMPAD9)
+						 game.persos[3].vitesseNeutre();
 	}
 	public void keyTyped(KeyEvent e) {}
 

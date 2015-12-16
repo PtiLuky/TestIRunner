@@ -12,7 +12,7 @@ public class  Objet {
     int vitesseX, vitesseY;          
     BufferedImage image;    
     Rectangle BoxObjet;
-    private Rectangle BoxHaut,BoxBas,BoxGauche,BoxDroite; 
+    private Rectangle BoxHaut,BoxBas,BoxDroite; 
     char type;     
    
 /**
@@ -38,10 +38,9 @@ public class  Objet {
         x=ax;   
         y=ay;
         BoxObjet = new Rectangle(x,y,l,h);
-        BoxHaut = new Rectangle(x,y-1,l-20,1);
-        BoxBas = new Rectangle(x,y+h,l-20,1);
-        BoxGauche = new Rectangle(x-1,y+10,1,h-20);
-        BoxDroite = new Rectangle(x+l,y+10,1,h-20);
+        BoxHaut = new Rectangle(x,y-1,l-10,1); //ici le -10 evite de compter les petites collisions dues aux "sauts" de Y (qui evolue par paliers) (donc depend de la vitesse du terrain)
+        BoxBas = new Rectangle(x,y+h,l-10,1);	//idem
+        BoxDroite = new Rectangle(x+l,y+10,1,h-20); //il faut que le 20/40 soient superieurs a la vitesse verticale/son double respectivement pour eviter les fausses collisions avec le sol et plafond
         vitesseX=vx;
         vitesseY=vy;
     }
@@ -83,7 +82,6 @@ public class  Objet {
         BoxObjet.setLocation(x,y);
         BoxHaut.setLocation(x,y-1);
         BoxBas.setLocation(x,y+h);
-        BoxGauche.setLocation(x-1,y+10);
         BoxDroite.setLocation(x+l,y+10);
         
     }

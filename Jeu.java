@@ -17,13 +17,13 @@ public class Jeu extends JPanel implements ActionListener{
 	private int hT=8; // hauteur terrain
 	private Objet[][] terrain;
 	Perso[] persos;
-	private int vitesseGravity=10;
+	private int vitesseGravity=8; //vitesse verticale des persos
 	private Partie contener;
 	private Bouton jeuMenu,jeuQuit;
 	
 	private BufferedImage arrierePlan,fond;
 	private Graphics buffer;
-	private Timer timer= new Timer(50,this);
+	private Timer timer= new Timer(25,this); // timer regulant les vitesses
 
 /**
  * Demarre une partie (le moment ou les joueurs jouent)
@@ -33,7 +33,7 @@ public class Jeu extends JPanel implements ActionListener{
  * @param contener : conteneur global
  */
 	public Jeu(int[] choixJoueurs,int l,int h,Partie contener){
-		vitesse=10;
+		vitesse=5; //vitesse du terrain
 		this.contener=contener;
 
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
@@ -89,10 +89,10 @@ public class Jeu extends JPanel implements ActionListener{
 							if(persos[k].CollisionDroite(terrain[i][j]))
 								contactXD = true;
 						}
-				if (contactYH || contactYB){
+				if ((contactYH && !persos[k].gravity)||(contactYB && persos[k].gravity)){
 					persos[k].vitesseY=0;
 					persos[k].land();
-				}else {
+				}else{
 					persos[k].vitesseY=(persos[k].gravity)? vitesseGravity : -vitesseGravity;
 					persos[k].fly();
 				}if(contactXD){
@@ -122,7 +122,9 @@ public class Jeu extends JPanel implements ActionListener{
 	public void stop(){
 		timer.stop();
         for(int i=0;i<persos.length;i++)
-        	persos[i].timer.stop();;
+        	persos[i].timer.stop();
+        contener.setContentPane(new Score(persos,l,h,contener));
+        contener.setVisible(true);
 	}
 	
 	public void paintComponent(Graphics g){

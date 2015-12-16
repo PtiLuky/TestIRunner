@@ -18,12 +18,12 @@ import javax.swing.JTextArea;
 
 public class Menu extends JPanel implements MouseListener, ActionListener{
 	private Image[] courses;
-	private int type,l,h;
+	protected int type,l,h;
 	private BufferedImage arrierePlan,fond;
 	private Graphics buffer;
 	private int nbrCourses=6;
 	private int decalageImage=0;
-	private Partie contener;
+	protected Partie contener;
 	//grands boutons
 	private Bouton menuPlay,menuQuit,menuOption,menu2,menu3,menu4;
 	//boutons mini
@@ -121,7 +121,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
  * Cree le menu de type 2
  */
 	private void creerMenuRegles(){
-		titre=new JLabel("Règles :");
+		titre=new JLabel("Regles :");
 		titre.setFont(font);
 		titre.setForeground(new Color(235,104,104));
 		titre.setBounds(l/2-240,10,480,100);

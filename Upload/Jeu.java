@@ -17,13 +17,13 @@ public class Jeu extends JPanel implements ActionListener{
 	private int hT=8; // hauteur terrain
 	private Objet[][] terrain;
 	Perso[] persos;
-	private int vitesseGravity=10;
+	private int vitesseGravity=8; //vitesse verticale des persos
 	private Partie contener;
 	private Bouton jeuMenu,jeuQuit;
 	
 	private BufferedImage arrierePlan,fond;
 	private Graphics buffer;
-	private Timer timer= new Timer(50,this);
+	private Timer timer= new Timer(25,this); // timer regulant les vitesses
 
 /**
  * Demarre une partie (le moment ou les joueurs jouent)
@@ -33,7 +33,7 @@ public class Jeu extends JPanel implements ActionListener{
  * @param contener : conteneur global
  */
 	public Jeu(int[] choixJoueurs,int l,int h,Partie contener){
-		vitesse=10;
+		vitesse=5; //vitesse du terrain
 		this.contener=contener;
 
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
@@ -89,10 +89,7 @@ public class Jeu extends JPanel implements ActionListener{
 							if(persos[k].CollisionDroite(terrain[i][j]))
 								contactXD = true;
 						}
-				if (contactYH && !persos[k].gravity){
-					persos[k].vitesseY=0;
-					persos[k].land();
-				}else if(contactYB && persos[k].gravity){
+				if ((contactYH && !persos[k].gravity)||(contactYB && persos[k].gravity)){
 					persos[k].vitesseY=0;
 					persos[k].land();
 				}else{
