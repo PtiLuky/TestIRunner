@@ -25,7 +25,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	private int decalageImage=0;
 	private Partie contener;
 	//grands boutons
-	private Bouton menuPlay,menuQuit,/*menuOption,*/menu2,menu3,menu4;
+	private Bouton menuPlay,menuQuit,menuOption,menu2,menu3,menu4;
 	//boutons mini
 	private Bouton jeuMenu,jeuQuit;
 	private JLabel titre;
@@ -79,10 +79,13 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	private void creerMenuAccueil(){
 		menuPlay = new Bouton("Jouer", l/2,200);
 		menuPlay.addActionListener(this);
-		menuQuit = new Bouton("quitter", l/2,400);
+		menuQuit = new Bouton("quitter", l/2,375);
 		menuQuit.addActionListener(this);
+		menuOption = new Bouton("fleche-d", l/2+200,550);
+		menuOption.addActionListener(this);
 		add(menuPlay);
 		add(menuQuit);
+		add(menuOption);
 		titre=new JLabel("Test I-Runner");
 		titre.setFont(font);
 		titre.setForeground(new Color(235,104,104));
@@ -178,6 +181,10 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	//GoTo Menu principal
 		else if(arg0.getSource()==jeuMenu){		
 			contener.setContentPane(new Menu(0,l,h,contener));
+			contener.setVisible(true);  
+	//GoTo Options
+		}else if(arg0.getSource()==menuOption){		
+			contener.setContentPane(new Menu(2,l,h,contener));
 			contener.setVisible(true);  
 	//GoTo game
 		}else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
