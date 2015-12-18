@@ -12,9 +12,9 @@ public class Bouton extends JButton implements MouseListener{
 	int x,y,l,h;
 /**
  * Cree un bouton dont les images sont personnalisees, sans bord
- * @param nom : nom des fichiers images correspondant au bouton
- * @param xCentre : abscisse du centre de l'image
- * @param yHaut : ordonnee du haut de l'image
+ * @param nom nom des fichiers images correspondant au bouton
+ * @param xCentre abscisse du centre de l'image
+ * @param yHaut ordonnee du haut de l'image
  */
 	Bouton(String nom,int xCentre, int yHaut){
 		super(nom);
@@ -39,17 +39,19 @@ public class Bouton extends JButton implements MouseListener{
 		addMouseListener(this);
 	}
 	
+	@Override
 	public void paintComponent(Graphics g){
 		g.drawImage(imgActuelle,0,0,null);
 	}
-
+	
+	@Override
 	public void mouseClicked(MouseEvent arg0) {}
-
+	@Override
 	public void mouseEntered(MouseEvent arg0) {imgActuelle=imgUp;}
-
+	@Override
 	public void mouseExited(MouseEvent arg0) {imgActuelle=imgNeutre;}
-
+	@Override
 	public void mouseReleased(MouseEvent arg0) {imgActuelle=imgNeutre;}
-
+	@Override
 	public void mousePressed(MouseEvent arg0) {imgActuelle=imgReleased;}
 }

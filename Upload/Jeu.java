@@ -13,24 +13,35 @@ import javax.swing.Timer;
 
 public class Jeu extends JPanel implements ActionListener{
 	private int l,h,vitesse;
-	private int lT=12; //largeur terrain
-	private int hT=8; // hauteur terrain
+	/**
+	 * largeur terrain
+	 */
+	private int lT=12;
+	/**
+	 * hauteur terrain
+	 */
+	private int hT=8; 
 	private Objet[][] terrain;
 	Perso[] persos;
-	private int vitesseGravity=8; //vitesse verticale des persos
+	/**
+	 * vitesse verticale des persos
+	 */
+	private int vitesseGravity=8;
 	private Partie contener;
 	private Bouton jeuMenu,jeuQuit;
 	
 	private BufferedImage arrierePlan,fond;
 	private Graphics buffer;
-	private Timer timer= new Timer(25,this); // timer regulant les vitesses
-
+	/**
+	 *  timer regulant les vitesses
+	 */
+	private Timer timer= new Timer(25,this); 
 /**
  * Demarre une partie (le moment ou les joueurs jouent)
- * @param nbJoueurs : nombre de joueurs
- * @param l : largeur
- * @param h : hauteur
- * @param contener : conteneur global
+ * @param choixJoueurs tableau des types choisis par les joueurs
+ * @param l largeur
+ * @param h hauteur
+ * @param contener conteneur global
  */
 	public Jeu(int[] choixJoueurs,int l,int h,Partie contener){
 		vitesse=5; //vitesse du terrain
@@ -127,6 +138,7 @@ public class Jeu extends JPanel implements ActionListener{
         contener.setVisible(true);
 	}
 	
+	@Override
 	public void paintComponent(Graphics g){
 		buffer.drawImage(fond, 0,0, this);
 		for(int j=0;j<terrain[0].length;j++) //chaque colonne
@@ -136,8 +148,9 @@ public class Jeu extends JPanel implements ActionListener{
         	if(persos[i].alive)
         		buffer.drawImage(persos[i].image, persos[i].x, persos[i].y, this);
 		g.drawImage(arrierePlan, 0,0, this);
-		
 	}
+	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==timer){
 			for(int j=0;j<terrain[0].length;j++) //chaque colonne

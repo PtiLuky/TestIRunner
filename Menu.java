@@ -130,9 +130,9 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 				+ " terrain gagne.\n\n"
 				+ "Touches :\n"
 				+ "Joueur 1 : ralentir A ; sauter Z ; accelerer E\n"
-				+ "Joueur 2 : ralentir C ; sauter V ; accelerer B\n"
-				+ "Joueur 3 : ralentir K ; sauter L ; accelerer M\n"
-				+ "Joueur 4 : ralentir 7 ; sauter 8 ; accelerer 9\n");
+				+ "Joueur 2 : ralentir 7 ; sauter 8 ; accelerer 9\n"
+				+ "Joueur 3 : ralentir C ; sauter V ; accelerer B\n"
+				+ "Joueur 4 : ralentir K ; sauter L ; accelerer M\n");
 		text.setFont(font.deriveFont(24.f));
 		text.setEditable(false);
 		text.setOpaque(false);
@@ -147,7 +147,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		add(jeuMenu);
 	}
 	
-	
+	@Override
 	public void paintComponent(Graphics g){
 		buffer.drawImage(fond, 0,0, this);
 		if(type==0||type==1){
@@ -159,16 +159,20 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		}
 		g.drawImage(arrierePlan, 0,0, this); 
 	}
-
+	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		decalageImage++;
 	}
-	
+	@Override
 	public void mouseEntered(MouseEvent arg0) {}
+	@Override
 	public void mouseExited(MouseEvent arg0) {}
+	@Override
 	public void mousePressed(MouseEvent arg0) {}
+	@Override
 	public void mouseReleased(MouseEvent arg0) {}
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 	//GoTo Menu nbr Joueurs
 		if(arg0.getSource()==menuPlay){			
@@ -188,9 +192,9 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			contener.setVisible(true);  
 	//GoTo game
 		}else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
-			int[]test2={1,2};
-			int[]test3={1,2,3};
-			int[]test4={1,2,3,4};
+			int[]test2={7,8};
+			int[]test3={7,8,9};
+			int[]test4={7,2,3,4};
 			if(arg0.getSource()==menu2)
 				contener.game=new Jeu(test2,l,h,contener);
 			else if(arg0.getSource()==menu3)

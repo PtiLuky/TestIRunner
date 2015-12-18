@@ -37,7 +37,7 @@ private Bouton retourMenu;
 			score_j = new JLabel("Joueur "+(i+1)+" : "+persos_tab[i].temps);
 			score_j.setFont(font);
 			score_j.setForeground(new Color(235,104,104));
-			score_j.setBounds(20,100*i+100,340,100);
+			score_j.setBounds(20,100*i+100,500,100);
 			add(score_j);
 		}
 		
@@ -47,6 +47,7 @@ private Bouton retourMenu;
 		 
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource()==retourMenu){
 			contener.setContentPane(new Menu(0,l,h,contener));

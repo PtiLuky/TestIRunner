@@ -10,7 +10,7 @@ abstract class Terrain {
 	
 /**
  * Cree le debut du terrain - simple pour demarrer 
- * @param terrain : terrain a modifier
+ * @param terrain terrain a modifier
  */
 	public static void initTerrain(Objet[][] terrain){
 		int longueurDebut=9;
@@ -37,7 +37,7 @@ abstract class Terrain {
 	
 /**
  * met a jour le terrain et decale tout si besoin
- * @param terrain : terrain a modifier
+ * @param terrain terrain a modifier
  */
 	public static void gestionTerrain(Objet[][] terrain){
 		if(terrain[1][1].x<0){ // si une colonne est entierement cachee
@@ -50,9 +50,9 @@ abstract class Terrain {
 	
 /**
  * genere une colonne du terrain en fonction de la precedente
- * @param terrain : terrain a modifier
- * @param j : 0<j<11, colonne a creer
- * @param decal : decalage de l'abscisse de la colonne
+ * @param terrain terrain a modifier
+ * @param j compris entre 0 et 11, colonne a creer
+ * @param decal decalage de l'abscisse de la colonne
  */
 	private static void generTerrain(Objet[][] terrain,int j,int decal){ 
 		int random;

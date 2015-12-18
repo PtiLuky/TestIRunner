@@ -19,16 +19,19 @@ public class Perso extends Objet implements  ActionListener{
 	private int tempsSaut;
 	int vitessePropre;
 	boolean gravity=true;//true normale, false inversee     
-	private BufferedImage[] courseImg,sautImg,volImg,atteriImg;
-	private BufferedImage[] courseRev,sautRev,volRev,atteriRev;
+	private BufferedImage[] courseImg,sautImg,volImg,atteriImg; //images droites
+	private BufferedImage[] courseRev,sautRev,volRev,atteriRev; //images renversees
     Timer timer=new Timer(50,this); //timer des animations de perso
     boolean alive=true;
-    int temps;
+    int temps; //temps, equivalent au score du joueur
     
-/**
+ /**
  * Constructeur d'un perso
- * @param type couleur du perso, entre 1 et 6
+ * @param type couleur du perso, entre 1 et 6 pour le bipede, 7 pour la boule rebondissante
  * @param pseudo Pseudo associe au perso
+ * @param x abscisse
+ * @param y ordonnee 
+ * @param gravity gravite active, true = normale, false = inversee
  */
 	public Perso(int type, String pseudo,int x,int y, boolean gravity){
 		super("/persos/run_mini"+type+"-1.png",'X',x,y,0,0);
@@ -36,13 +39,18 @@ public class Perso extends Objet implements  ActionListener{
 		this.type=type;
 		this.pseudo=pseudo;
 		courseImg=new BufferedImage[6];
-		sautImg=new BufferedImage[4];
 		volImg=new BufferedImage[3];
-		atteriImg=new BufferedImage[4];
-		courseRev=new BufferedImage[6];
-		sautRev=new BufferedImage[4];
-		volRev=new BufferedImage[3];
-		atteriRev=new BufferedImage[4];
+		if(type<7){
+			sautImg=new BufferedImage[4];
+			atteriImg=new BufferedImage[4];
+		}else{
+			sautImg=new BufferedImage[1];
+			atteriImg=new BufferedImage[2];
+		}
+		courseRev=new BufferedImage[courseImg.length];
+		sautRev=new BufferedImage[sautImg.length];
+		volRev=new BufferedImage[volImg.length];
+		atteriRev=new BufferedImage[atteriImg.length];
 		//generation des images droites
         try {
         	for(int i=0;i<courseImg.length;i++)
@@ -54,7 +62,7 @@ public class Perso extends Objet implements  ActionListener{
         	for(int i=0;i<atteriImg.length;i++)
         		atteriImg[i]= ImageIO.read(new File("images/persos/land_mini"+type+"-"+(i+1)+".png"));
         }catch(Exception err){
-           System.out.println("Image d'animation introuvable !");            
+           System.out.println("Image d'animation introuvable !" );            
            System.exit(0);    
        }
         
@@ -86,7 +94,7 @@ public class Perso extends Objet implements  ActionListener{
 	public void jump(){
 		if(!saut){
 			 gravity=!gravity;
-			 tempsSaut=4;
+			 tempsSaut=sautImg.length;
 			 y=gravity?y+10:y-10;
 			 fly();
 		}
@@ -97,7 +105,7 @@ public class Perso extends Objet implements  ActionListener{
 	public void land(){
 		if(saut&&tempsSaut==0){
 			saut=false;
-			tempsLand=4;
+			tempsLand=atteriImg.length;
 		}
 	}
 /**
@@ -126,26 +134,26 @@ public class Perso extends Objet implements  ActionListener{
  * @param r : un rectangle correspondant a la taille du terrain
  */
 	public void checkAlive(Rectangle r){
-		if(!BoxObjet.intersects(r)){
+		if(!boxObjet.intersects(r)){
 			alive=false;
 		}
 	}
 	
-	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(alive){
 			//On assigne la bonne image en fonction de l'etat du perso
 			if(tempsSaut>0&&!gravity){
-				image=sautImg[4-tempsSaut];
+				image=sautImg[sautImg.length-tempsSaut];
 				tempsSaut--;
 			}else if(tempsSaut>0&&gravity){
-				image=sautRev[4-tempsSaut];
+				image=sautRev[sautImg.length-tempsSaut];
 				tempsSaut--;
 			}else if(tempsLand>0&&gravity){
-				image=atteriImg[4-tempsLand];
+				image=atteriImg[atteriImg.length-tempsLand];
 				tempsLand--;
 			}else if(tempsLand>0&&!gravity){
-				image=atteriRev[4-tempsLand];
+				image=atteriRev[atteriImg.length-tempsLand];
 				tempsLand--;
 			}else if(saut&&!gravity){
 				image=volImg[temps%volImg.length];
