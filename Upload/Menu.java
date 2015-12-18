@@ -19,9 +19,9 @@ import javax.swing.JTextArea;
 public class Menu extends JPanel implements MouseListener, ActionListener{
 	private Image[] courses;
 	protected int type,l,h;
-	private BufferedImage arrierePlan,fond;
+	private BufferedImage arrierePlan,fond,clic;
 	private Graphics buffer;
-	private int nbrCourses=6;
+	private int nbrCourses=9;
 	private int decalageImage=0;
 	protected Partie contener;
 	//grands boutons
@@ -56,6 +56,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	//creation du fond et de la police
         try {
             fond= ImageIO.read(new File("images/fond2.jpg"));
+            clic= ImageIO.read(new File("images/clic.png"));
 		    font = Font.createFont(Font.TRUETYPE_FONT, new File("policePerso.ttf")); 
 		    font = font.deriveFont(38.f);
         }catch(Exception e) {
@@ -156,6 +157,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			buffer.drawImage(courses[(2+decalageImage)%nbrCourses],475, h-128, this);
 			buffer.drawImage(courses[(1+decalageImage)%nbrCourses],575, h-128, this);
 			buffer.drawImage(courses[(0+decalageImage)%nbrCourses],675, h-128, this);
+			buffer.drawImage(clic,100, h-200, this);
 		}
 		g.drawImage(arrierePlan, 0,0, this); 
 	}
