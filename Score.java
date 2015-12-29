@@ -1,3 +1,6 @@
+/*
+ * Cette classe gère les scores des joueurs 
+ */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,6 +17,8 @@ private Bouton retourMenu;
 
 	/*
 	 * Cette methode affiche les scores des joueurs a la fin de la partie
+	 * Recuperation grace au timer du temps de survie de chaque personnage puis affichage de la meme maniere que le menu
+	 * Ajout d'un bouton permettant le retour vers le menu principal
 	 */
 	public Score(Perso[] persos_tab, int l, int h, Partie contener) {
 		super(-1, l, h, contener);
