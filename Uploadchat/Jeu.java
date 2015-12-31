@@ -65,7 +65,7 @@ public class Jeu extends JPanel implements ActionListener{
         for(int i=0;i<choixJoueurs.length;i++){
         	boolean grav=(i==0||i==2)?true:false;
         	int y=(i==0||i==1)?500:300;
-        	persos[i]=new Perso(choixJoueurs[i],"test",200,y,grav);
+        	persos[i]=new Perso(choixJoueurs[i]+1,"test",200,y,grav);
         }
     //Cree le terrain 
 		terrain=new Objet[hT][lT];
