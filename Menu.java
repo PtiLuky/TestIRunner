@@ -193,7 +193,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			contener.setContentPane(new Menu(2,l,h,contener));
 			contener.setVisible(true);  
 	//GoTo game
-		}else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
+		}else/* if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
 			int[]test2={7,8};
 			int[]test3={7,8,9};
 			int[]test4={7,2,3,4};
@@ -205,7 +205,16 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 				contener.game=new Jeu(test4,l,h,contener);
 			contener.setContentPane(contener.game);
 			contener.setVisible(true); 
+		}*/
+		if(arg0.getSource()==menu2){
+			contener.setContentPane(new ChoixPerso(2,l,h,contener));
+			contener.setVisible(true);
+		} else if(arg0.getSource()==menu3){
+			contener.setContentPane(new ChoixPerso(3,l,h,contener));
+			contener.setVisible(true);	
+		}else if(arg0.getSource()==menu4){
+			contener.setContentPane(new ChoixPerso(4,l,h,contener));
+			contener.setVisible(true);
 		}
-				
 	}
 }

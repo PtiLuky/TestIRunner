@@ -1,5 +1,5 @@
 /*
- * Cette classe gère les scores des joueurs 
+ * Cette classe gï¿½re les scores des joueurs 
  */
 import java.awt.Color;
 import java.awt.Font;
@@ -57,7 +57,7 @@ private Bouton retourMenu;
 		if(arg0.getSource()==retourMenu){
 			contener.setContentPane(new Menu(0,l,h,contener));
 			contener.setVisible(true); 
-	}
+		}
 	}
 
 }
