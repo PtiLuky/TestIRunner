@@ -15,6 +15,7 @@ private JLabel score;
 private JLabel score_j;
 private Bouton retourMenu;
 private Bouton rejouer;
+private Bouton quitter;
 
 	/*
 	 * Cette methode affiche les scores des joueurs a la fin de la partie
@@ -34,6 +35,7 @@ private Bouton rejouer;
 	        	System.exit(0);    
 	        }
 		score = new JLabel("Scores :");
+		score.setText("Test");
 		score.setFont(font);
 		score.setForeground(new Color(235,104,104));
 		score.setBounds(l/2-170,10,340,100);
@@ -54,6 +56,10 @@ private Bouton rejouer;
 		retourMenu = new Bouton ("menu-mini",l-100,50);
 		add(retourMenu);
 		retourMenu.addActionListener(this);
+		
+		quitter = new Bouton ("quitter-mini",100,h-150);
+		add(quitter);
+		quitter.addActionListener(this);
 		 
 	}
 	
@@ -67,6 +73,9 @@ private Bouton rejouer;
 			contener.game=new Jeu(ChoixPerso.persoJoueur,l,h,contener);
 			contener.setContentPane(contener.game);
 			contener.setVisible(true);
+	}
+		if(arg0.getSource()==quitter){
+			System.exit(0);
 	}
 	}
 
