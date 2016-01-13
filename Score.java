@@ -56,7 +56,7 @@ private Bouton quitter;
 		add(retourMenu);
 		retourMenu.addActionListener(this);
 		
-		quitter = new Bouton ("quitter-mini",l-100,50);
+		quitter = new Bouton ("quitter-mini",l-100,30);
 		add(quitter);
 		quitter.addActionListener(this);
 		 

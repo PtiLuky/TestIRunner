@@ -89,9 +89,6 @@ public class ChoixPerso extends Menu{
         joueur = new Perso[nbJoueur];
 		for (int i=0; i<nbJoueur; i++){
 			joueur[i] = new Perso(i+1,("Joueur " + (i+1)),100,100,true);  // qu'on commence au joueur 1 et pas 0
-			//Joueur[i].pseudo = ("Joueur " + (i+1));
-			//Joueur[i].type = i+1;
-			//Joueur[i].joueur = i+1;
 		}
 		affichageChoix(joueur);
 	}
@@ -172,16 +169,12 @@ public class ChoixPerso extends Menu{
 				String titre = myButton.getName();
 				if(titre.contains("1")){
 					currentJoueur = 0;
-					System.out.println("nous sommes dans joueur1");
 				} else if (titre.contains("2")){
 					currentJoueur = 1;
-					System.out.println("nous sommes dans joueur2");
 				} else if(titre.contains("3")){
 					currentJoueur = 2;
-					System.out.println("nous sommes dans joueur3");
 				} else if(titre.contains("4")){
 					currentJoueur = 3;
-					System.out.println("nous sommes dans joueur4");
 				}
 			} else {
 				if (myObj.getClass().toString().contains("Bouton"))
