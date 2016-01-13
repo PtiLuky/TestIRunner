@@ -168,9 +168,10 @@ public class Perso extends Objet implements  ActionListener{
 		}else
 			timer.stop();
 	}
-	
+
 	public String toString(){
 		return pseudo;
 	}
+	
 
 }

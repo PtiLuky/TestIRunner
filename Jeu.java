@@ -77,6 +77,7 @@ public class Jeu extends JPanel implements ActionListener{
 		jeuMenu.addActionListener(this);
 		add(jeuQuit);
 		add(jeuMenu);
+		
 		timer.start();
 	}
 	

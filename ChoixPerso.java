@@ -9,11 +9,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
-<<<<<<< HEAD
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-=======
->>>>>>> origin/master
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
@@ -22,23 +19,14 @@ public class ChoixPerso extends Menu{
 	Perso[] joueur;
 	JLabel J1;
 	private Font font;
-<<<<<<< HEAD
 	private Bouton goJeu;
-=======
-	private Bouton goJeu,jeuMenu,jeuQuit;
->>>>>>> origin/master
 	private int nbrCourses=9;
 	private Image[] courses;
 	private BufferedImage arrierePlan, fond;
 	private Graphics buffer;
-<<<<<<< HEAD
 	private JLabel[] tab_joueurs;
 	Bouton[] persos_tab;
 	public static int[] persoJoueur;
-=======
-	Bouton[] persos_tab;
-	int[] persoJoueur;
->>>>>>> origin/master
 	int currentJoueur = 0;
 	int nbJoueur;
 	
@@ -58,7 +46,6 @@ public class ChoixPerso extends Menu{
 	        	System.exit(0);    
 	        }
 		
-<<<<<<< HEAD
 		nbJoueur = nbrJ; //on utilise le parametre passe ;)
 		tab_joueurs = new JLabel[nbrJ];
 		
@@ -66,20 +53,6 @@ public class ChoixPerso extends Menu{
 		goJeu.addActionListener(this);
 		add(goJeu);
 		
-=======
-		nbJoueur = nbrJ;
-		
-		goJeu = new Bouton ("fleche-d",l-200,300);		
-		goJeu.addActionListener(this);
-		jeuQuit = new Bouton("quitter-mini", l-94,10);
-		jeuQuit.addActionListener(this);
-		jeuMenu = new Bouton("fleche-g", 74,10);
-		jeuMenu.addActionListener(this);
-		add(jeuQuit);
-		add(jeuMenu);
-		add(goJeu);
-		
->>>>>>> origin/master
 		Toolkit T=Toolkit.getDefaultToolkit();
 		courses=new Image[nbrCourses];
         for(int i=0;i<nbrCourses;i++)
@@ -88,17 +61,10 @@ public class ChoixPerso extends Menu{
         //Personnages par defaut pour les joueurs
         persoJoueur  = new int[nbJoueur];
         for(int i=0;i<nbJoueur;i++){
-<<<<<<< HEAD
         persoJoueur[i] = i;
         }
         
         String nom = "test";
-=======
-        	persoJoueur[i] = i;
-        }
-        
-        String nom = "cadre";
->>>>>>> origin/master
         persos_tab = new Bouton[9];
         
         for(int i=0;i<nbrCourses;i++){
@@ -112,7 +78,10 @@ public class ChoixPerso extends Menu{
 		     
         joueur = new Perso[nbJoueur];
 		for (int i=0; i<nbJoueur; i++){
-			joueur[i] = new Perso(i+1,("Joueur " + (i+1)),100,100,true); 
+			joueur[i] = new Perso(i+1,("Joueur " + (i+1)),100,100,true);  // qu'on commence au joueur 1 et pas 0
+			//Joueur[i].pseudo = ("Joueur " + (i+1));
+			//Joueur[i].type = i+1;
+			//Joueur[i].joueur = i+1;
 		}
 		affichageChoix(joueur);
 	}
@@ -131,11 +100,7 @@ public class ChoixPerso extends Menu{
 			
 		    JRadioButton joueur_but = new JRadioButton();
 		    joueur_but.setBounds(new Rectangle(20,135+100*j,20,20));
-<<<<<<< HEAD
 		    joueur_but.setBackground(null);
-=======
-		    joueur_but.setOpaque(false);
->>>>>>> origin/master
 		    joueur_but.setName("joueur"+(j+1));
 		    joueur_but.addActionListener(this);
 		    if(j==0){
@@ -164,11 +129,7 @@ public class ChoixPerso extends Menu{
 		
 		//Dessine les personnages selectionnes
 		for(int j=0; j<nbJoueur; j++){  
-<<<<<<< HEAD
 		buffer.drawImage(courses[persoJoueur[j]],275, 110+100*j, this);
-=======
-			buffer.drawImage(courses[persoJoueur[j]],275, 110+100*j, this);
->>>>>>> origin/master
 		}
 		
 		//Dessine arriere plan	
@@ -183,21 +144,10 @@ public class ChoixPerso extends Menu{
 			//lancer une nouvelle partie
 			contener.game=new Jeu(persoJoueur,l,h,contener);
 			contener.setContentPane(contener.game);
-<<<<<<< HEAD
 			contener.setVisible(true);
 			//contener.setContentPane(new Menu(0,l,h,contener));			 
 		
 		//penser à creer une variable pour savoir quel joueur est selectionne (joueur courant), puis afficher l'image du perso a cote de ce joueur
-=======
-			contener.setVisible(true);			 
-		}else if(myObj==jeuQuit)
-			 System.exit (0);
-		
-	//GoTo Menu principal
-		else if(myObj==jeuMenu){		
-			contener.setContentPane(new Menu(0,l,h,contener));
-			contener.setVisible(true); 
->>>>>>> origin/master
 		} else {
 			if (myObj.getClass().toString().contains("JRadioButton"))
 			{
@@ -205,7 +155,6 @@ public class ChoixPerso extends Menu{
 				String titre = myButton.getName();
 				if(titre.contains("1")){
 					currentJoueur = 0;
-<<<<<<< HEAD
 					System.out.println("nous sommes dans joueur1");
 				} else if (titre.contains("2")){
 					currentJoueur = 1;
@@ -216,22 +165,11 @@ public class ChoixPerso extends Menu{
 				} else if(titre.contains("4")){
 					currentJoueur = 3;
 					System.out.println("nous sommes dans joueur4");
-=======
-				} else if (titre.contains("2")){
-					currentJoueur = 1;
-				} else if(titre.contains("3")){
-					currentJoueur = 2;
-				} else if(titre.contains("4")){
-					currentJoueur = 3;
->>>>>>> origin/master
 				}
 			} else {
 				if (myObj.getClass().toString().contains("Bouton"))
 				{
-<<<<<<< HEAD
 					//String toto = String.class.toString();
-=======
->>>>>>> origin/master
 					Bouton myBouton = (Bouton) myObj;
 					String myObject = myBouton.getName();
 					
@@ -260,7 +198,6 @@ public class ChoixPerso extends Menu{
 	}
 }
 
-<<<<<<< HEAD
 
 
 
@@ -287,5 +224,3 @@ monJLabel.setForeground(new Color(222,124,124));
 
 
 */
-=======
->>>>>>> origin/master
