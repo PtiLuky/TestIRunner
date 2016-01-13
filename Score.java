@@ -1,5 +1,5 @@
 /*
- * Cette classe gère les scores des joueurs 
+ * Cette classe gere les scores des joueurs 
  */
 import java.awt.Color;
 import java.awt.Font;
@@ -52,11 +52,11 @@ private Bouton quitter;
 		add(rejouer);
 		rejouer.addActionListener(this);
 		
-		retourMenu = new Bouton ("menu-mini",l-100,50);
+		retourMenu = new Bouton ("menu-mini",100,h-150);
 		add(retourMenu);
 		retourMenu.addActionListener(this);
 		
-		quitter = new Bouton ("quitter-mini",100,h-150);
+		quitter = new Bouton ("quitter-mini",l-100,50);
 		add(quitter);
 		quitter.addActionListener(this);
 		 

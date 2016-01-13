@@ -29,6 +29,8 @@ public class ChoixPerso extends Menu{
 	public static int[] persoJoueur;
 	int currentJoueur = 0;
 	int nbJoueur;
+	private Bouton retourMenu;
+	private Bouton quitter;
 	
 	//Constructeur
 	
@@ -49,9 +51,17 @@ public class ChoixPerso extends Menu{
 		nbJoueur = nbrJ; //on utilise le parametre passe ;)
 		tab_joueurs = new JLabel[nbrJ];
 		
-		goJeu = new Bouton ("fleche-d",l-100,50);		
+		goJeu = new Bouton ("fleche-d",l-100,h-250);		
 		goJeu.addActionListener(this);
 		add(goJeu);
+		
+		retourMenu = new Bouton ("menu-mini",100,30);
+		add(retourMenu);
+		retourMenu.addActionListener(this);
+		
+		quitter = new Bouton ("quitter-mini",l-100,30);
+		add(quitter);
+		quitter.addActionListener(this);
 		
 		Toolkit T=Toolkit.getDefaultToolkit();
 		courses=new Image[nbrCourses];
@@ -145,9 +155,16 @@ public class ChoixPerso extends Menu{
 			contener.game=new Jeu(persoJoueur,l,h,contener);
 			contener.setContentPane(contener.game);
 			contener.setVisible(true);
-			//contener.setContentPane(new Menu(0,l,h,contener));			 
+				 
 		
-		//penser à creer une variable pour savoir quel joueur est selectionne (joueur courant), puis afficher l'image du perso a cote de ce joueur
+		//penser a creer une variable pour savoir quel joueur est selectionne (joueur courant), puis afficher l'image du perso a cote de ce joueur
+		} else if (myObj==retourMenu){
+			contener.setContentPane(new Menu(0,l,h,contener));
+			contener.setVisible(true);
+				
+		} else if (myObj==quitter){
+			System.exit(0);
+		
 		} else {
 			if (myObj.getClass().toString().contains("JRadioButton"))
 			{
