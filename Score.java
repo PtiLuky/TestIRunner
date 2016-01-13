@@ -35,7 +35,6 @@ private Bouton quitter;
 	        	System.exit(0);    
 	        }
 		score = new JLabel("Scores :");
-		score.setText("Test");
 		score.setFont(font);
 		score.setForeground(new Color(235,104,104));
 		score.setBounds(l/2-170,10,340,100);
