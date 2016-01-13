@@ -63,7 +63,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
         	System.out.println(e.getMessage());           
         	System.exit(0);    
         }
-    //creation des gifs des persos, sans test d'existance
+    //creation des gifs des persos, sans test d'existence
         for(int i=0;i<nbrCourses;i++)
         	courses[i] = T.getImage("images/run_mini"+(i+1)+".gif");
 
