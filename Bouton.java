@@ -1,7 +1,9 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -9,7 +11,7 @@ import javax.swing.JButton;
 
 public class Bouton extends JButton implements MouseListener{
 	private BufferedImage imgNeutre, imgUp, imgReleased, imgActuelle;
-	int x,y,l,h;
+	private int x,y,l,h;
 /**
  * Cree un bouton dont les images sont personnalisees, sans bord
  * @param nom nom des fichiers images correspondant au bouton
@@ -23,10 +25,10 @@ public class Bouton extends JButton implements MouseListener{
 			 imgNeutre =  ImageIO.read(new File("images/boutons/"+nom+"1.png"));	//img du bouton
 			 imgUp =  ImageIO.read(new File("images/boutons/"+nom+"2.png"));		//img au survol
 			 imgReleased =  ImageIO.read(new File("images/boutons/"+nom+"3.png"));	//img au moment du clic
-		    } catch (IOException e) {
+		 } catch (IOException e) {
 		      e.printStackTrace();            
 	          System.exit(0);    
-		    }
+	     }
 		 imgActuelle=imgNeutre;
 		 x=xCentre-imgActuelle.getWidth()/2;
 		 y=yHaut;
@@ -35,7 +37,7 @@ public class Bouton extends JButton implements MouseListener{
 		
 		setBounds(x,y,l,h);
 		setBorderPainted(false);		//ne pas avoir les bordures des boutons
-		setContentAreaFilled(false);  //eviter le decalage du fond
+		setContentAreaFilled(false); 	//eviter le decalage du fond
 		addMouseListener(this);
 	}
 	

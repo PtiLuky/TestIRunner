@@ -11,8 +11,7 @@ import javax.swing.Timer;
 
 
 public class Perso extends Objet implements  ActionListener{
-	int type;
-	String pseudo;
+	String pseudo; //Non implante dans le jeu, mais pret a l'emploi ! il suffirait d'ajouter un menu d'entree des pseudos
 	
 	private boolean saut; //0 course, 1 saut
 	private int tempsLand;
@@ -36,7 +35,6 @@ public class Perso extends Objet implements  ActionListener{
 	public Perso(int type, String pseudo,int x,int y, boolean gravity){
 		super("/persos/run_mini"+type+"-1.png",'X',x,y,0,0);
 		this.gravity=gravity;
-		this.type=type;
 		this.pseudo=pseudo;
 		courseImg=new BufferedImage[6];
 		volImg=new BufferedImage[3];
@@ -168,7 +166,8 @@ public class Perso extends Objet implements  ActionListener{
 		}else
 			timer.stop();
 	}
-
+	
+	@Override
 	public String toString(){
 		return pseudo;
 	}

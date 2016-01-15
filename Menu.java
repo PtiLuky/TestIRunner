@@ -30,8 +30,6 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	private Bouton menuPlay,menuQuit,menuOption,menu2,menu3,menu4;
 	//boutons mini
 	private Bouton jeuMenu,jeuQuit;
-	private JLabel titre;
-	private JTextArea text;
 	private Font font;
 	
 /**
@@ -89,7 +87,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		add(menuPlay);
 		add(menuQuit);
 		add(menuOption);
-		titre=new JLabel("Test I-Runner");
+		JLabel titre=new JLabel("Test I-Runner");
 		titre.setFont(font);
 		titre.setForeground(new Color(235,104,104));
 		titre.setBounds(l/2-170,10,340,100);
@@ -99,7 +97,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
  * Cree le menu de type 1
  */
 	private void creerMenuChoixNombre(){
-		titre=new JLabel("Nombre de joueurs :");
+		JLabel titre=new JLabel("Nombre de joueurs :");
 		titre.setFont(font);
 		titre.setForeground(new Color(235,104,104));
 		titre.setBounds(l/2-240,10,480,100);
@@ -124,12 +122,12 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
  * Cree le menu de type 2
  */
 	private void creerMenuRegles(){
-		titre=new JLabel("Regles :");
+		JLabel titre=new JLabel("Regles :");
 		titre.setFont(font);
 		titre.setForeground(new Color(235,104,104));
 		titre.setBounds(l/2-240,10,480,100);
 		add(titre);
-		text=new JTextArea("Le but est simple : le dernier joueur en vie sur le\n"
+		JTextArea text=new JTextArea("Le but est simple : le dernier joueur en vie sur le\n"
 				+ " terrain gagne.\n\n"
 				+ "Touches :\n"
 				+ "Joueur 1 : ralentir A ; sauter Z ; accelerer E\n"
@@ -195,21 +193,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 			contener.setContentPane(new Menu(2,l,h,contener));
 			contener.setVisible(true);  
 	//GoTo game
-		}/*else if(arg0.getSource()==menu2||arg0.getSource()==menu3||arg0.getSource()==menu4){
-			int[]test2={7,8};
-			int[]test3={1,2,3};
-			int[]test4={7,2,3,4};
-			if(arg0.getSource()==menu2)
-				contener.game=new Jeu(test2,l,h,contener);
-			else if(arg0.getSource()==menu3)
-				contener.game=new Jeu(test3,l,h,contener);
-			else if(arg0.getSource()==menu4)
-				contener.game=new Jeu(test4,l,h,contener);
-			contener.setContentPane(contener.game);
-			contener.setVisible(true); 
-		} je mets en comm pour tester l'affichage du menu de choix */
-
-		if(arg0.getSource()==menu2){
+		}else if(arg0.getSource()==menu2){
 			contener.setContentPane(new ChoixPerso(2,l,h,contener));
 			contener.setVisible(true);
 		} else if(arg0.getSource()==menu3){
@@ -218,6 +202,6 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 		} else if(arg0.getSource()==menu4){
 			contener.setContentPane(new ChoixPerso(4,l,h,contener));
 			contener.setVisible(true);
-	}
+		}
 	}
 }

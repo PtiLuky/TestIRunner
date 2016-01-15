@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 public class Score extends Menu{
 	
 private Font font;
-private JLabel score;
-private JLabel score_j;
 private Bouton retourMenu;
 private Bouton rejouer;
 private Bouton quitter;
@@ -23,10 +21,12 @@ private Bouton quitter;
 	 * Ajout d'un bouton permettant le retour vers le menu principal
 	 */
 	public Score(Perso[] persos_tab, int l, int h, Partie contener) {
+		//Cree un menu vide (le fond)
 		super(-1, l, h, contener);
 		this.contener=contener;
 		this.h=h;
 		this.l=l;
+		//charge la police
 		 try {
 			    font = Font.createFont(Font.TRUETYPE_FONT, new File("policePerso.ttf")); 
 			    font = font.deriveFont(38.f);
@@ -34,20 +34,23 @@ private Bouton quitter;
 	        	System.out.println(e.getMessage());           
 	        	System.exit(0);    
 	        }
-		score = new JLabel("Scores :");
+		 
+		//Ecriture du texte
+		JLabel score = new JLabel("Scores :");
 		score.setFont(font);
 		score.setForeground(new Color(235,104,104));
 		score.setBounds(l/2-170,10,340,100);
 		add(score);
 		
 		for(int i=0;i<persos_tab.length;i++){
-			score_j = new JLabel("Joueur "+(i+1)+" : "+persos_tab[i].temps);
+			JLabel score_j = new JLabel("Joueur "+(i+1)+" : "+persos_tab[i].temps);
 			score_j.setFont(font);
 			score_j.setForeground(new Color(235,104,104));
 			score_j.setBounds(20,100*i+100,500,100);
 			add(score_j);
 		}
 		
+		//Mise en place des boutons
 		rejouer = new Bouton ("fleche-d",l-100,h-150);
 		add(rejouer);
 		rejouer.addActionListener(this);
