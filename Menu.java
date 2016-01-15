@@ -17,6 +17,8 @@ import javax.swing.JTextArea;
 
 
 public class Menu extends JPanel implements MouseListener, ActionListener{
+	static final long serialVersionUID=23512;
+	
 	private Image[] courses;
 	protected int type,l,h;
 	private BufferedImage arrierePlan,fond,clic;
