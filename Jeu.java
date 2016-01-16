@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 
 public class Jeu extends JPanel implements ActionListener{
+	static final long serialVersionUID=235512;
 	private int l,h,vitesse;
 	/**
 	 * largeur terrain

@@ -14,6 +14,8 @@ import javax.swing.JRadioButton;
 
 
 public class ChoixPerso extends Menu{
+	static final long serialVersionUID=23513;
+	
 	private Perso[] joueur;
 	private Font font;
 	private Bouton goJeu, retourMenu, quitter;

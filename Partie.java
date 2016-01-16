@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class Partie extends JFrame implements KeyListener{
+	static final long serialVersionUID=23514;
 	Jeu game;
 	
 	/**
@@ -21,7 +22,6 @@ public class Partie extends JFrame implements KeyListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setContentPane(new Menu(0,l,h,this));
-		//setContentPane(new ChoixPerso(2,-1,l,h,this));
 		setVisible(true); 
 		
 		setFocusable(true);

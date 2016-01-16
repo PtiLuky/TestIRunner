@@ -9,6 +9,7 @@ import java.io.File;
 import javax.swing.JLabel;
 
 public class Score extends Menu{
+	static final long serialVersionUID=23612;
 	
 private Font font;
 private Bouton retourMenu;
