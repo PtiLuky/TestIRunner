@@ -32,12 +32,12 @@ public class ChoixPerso extends Menu{
 	 * @param nbrJ nombre de joueurs
 	 * @param l largeur du JPanel
 	 * @param h hauteur du JPanel
-	 * @param contener JFrame (ici de type Partie) contenant le JPanel en question
+	 * @param container JFrame (ici de type Partie) contenant le JPanel en question
 	 */
-	public ChoixPerso (int nbrJ, int l,int h, Partie contener){
+	public ChoixPerso (int nbrJ, int l,int h, Partie container){
 		//On cree un menu vide
-		super(-1,l,h,contener);
-		this.contener=contener;
+		super(-1,l,h,container);
+		this.container=container;
 		//initialisation du buffer
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
 		buffer = arrierePlan.getGraphics();
@@ -154,14 +154,14 @@ public class ChoixPerso extends Menu{
 
 		//lancer une nouvelle partie
 		if(myObj==goJeu){
-			contener.requestFocusInWindow(); //permet de faire que les touches soient ecoutees par la fenetre (donc le jeu) et plus les (radio)boutons uniquement
-			contener.game=new Jeu(persoJoueur,l,h,contener);
-			contener.setContentPane(contener.game);
-			contener.setVisible(true);
+			container.requestFocusInWindow(); //permet de faire que les touches soient ecoutees par la fenetre (donc le jeu) et plus les (radio)boutons uniquement
+			container.game=new Jeu(persoJoueur,l,h,container);
+			container.setContentPane(container.game);
+			container.setVisible(true);
 		//aller au menu
 		} else if (myObj==retourMenu){
-			contener.setContentPane(new Menu(0,l,h,contener));
-			contener.setVisible(true);
+			container.setContentPane(new Menu(0,l,h,container));
+			container.setVisible(true);
 		//quitter
 		} else if (myObj==quitter){
 			System.exit(0);

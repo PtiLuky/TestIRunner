@@ -21,10 +21,10 @@ private Bouton quitter;
 	 * Recuperation grace au timer du temps de survie de chaque personnage puis affichage de la meme maniere que le menu
 	 * Ajout d'un bouton permettant le retour vers le menu principal
 	 */
-	public Score(Perso[] persos_tab, int l, int h, Partie contener) {
+	public Score(Perso[] persos_tab, int l, int h, Partie container) {
 		//Cree un menu vide (le fond)
-		super(-1, l, h, contener);
-		this.contener=contener;
+		super(-1, l, h, container);
+		this.container=container;
 		this.h=h;
 		this.l=l;
 		//charge la police
@@ -69,13 +69,13 @@ private Bouton quitter;
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource()==retourMenu){
-			contener.setContentPane(new Menu(0,l,h,contener));
-			contener.setVisible(true); 
+			container.setContentPane(new Menu(0,l,h,container));
+			container.setVisible(true); 
 	}
 		if(arg0.getSource()==rejouer){
-			contener.game=new Jeu(ChoixPerso.persoJoueur,l,h,contener);
-			contener.setContentPane(contener.game);
-			contener.setVisible(true);
+			container.game=new Jeu(ChoixPerso.persoJoueur,l,h,container);
+			container.setContentPane(container.game);
+			container.setVisible(true);
 	}
 		if(arg0.getSource()==quitter){
 			System.exit(0);

@@ -28,7 +28,7 @@ public class Jeu extends JPanel implements ActionListener{
 	 * vitesse verticale des persos
 	 */
 	private int vitesseGravity=8;
-	private Partie contener;
+	private Partie container;
 	private Bouton jeuMenu,jeuQuit;
 	
 	private BufferedImage arrierePlan,fond;
@@ -42,11 +42,11 @@ public class Jeu extends JPanel implements ActionListener{
  * @param choixJoueurs tableau des types choisis par les joueurs
  * @param l largeur
  * @param h hauteur
- * @param contener conteneur global
+ * @param container conteneur global
  */
-	public Jeu(int[] choixJoueurs,int l,int h,Partie contener){
+	public Jeu(int[] choixJoueurs,int l,int h,Partie container){
 		vitesse=5; //vitesse du terrain
-		this.contener=contener;
+		this.container=container;
 
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
 		buffer = arrierePlan.getGraphics();
@@ -135,8 +135,8 @@ public class Jeu extends JPanel implements ActionListener{
 		timer.stop();
         for(int i=0;i<persos.length;i++)
         	persos[i].timer.stop();
-        contener.setContentPane(new Score(persos,l,h,contener));
-        contener.setVisible(true);
+        container.setContentPane(new Score(persos,l,h,container));
+        container.setVisible(true);
 	}
 	
 	@Override
@@ -169,8 +169,8 @@ public class Jeu extends JPanel implements ActionListener{
 	//GoTo Menu principal
 		else if(e.getSource()==jeuMenu){	
 			stop();
-			contener.setContentPane(new Menu(0,l,h,contener));
-			contener.setVisible(true);  
+			container.setContentPane(new Menu(0,l,h,container));
+			container.setVisible(true);  
 		}
 	}
 

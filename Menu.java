@@ -25,7 +25,7 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	private Graphics buffer;
 	private int nbrCourses=9;
 	private int decalageImage=0;
-	protected Partie contener;
+	protected Partie container;
 	//grands boutons
 	private Bouton menuPlay,menuQuit,menuOption,menu2,menu3,menu4;
 	//boutons mini
@@ -37,12 +37,12 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
  * @param type : -1 = vide, 0 = accueil, 1= nbr joueurs, 2=regles
  * @param l : largeur
  * @param h : hauteur
- * @param contener : conteneur global
+ * @param container : conteneur global
  */
-	public Menu(int type,int l,int h, Partie contener){
+	public Menu(int type,int l,int h, Partie container){
 		super();
 
-		this.contener=contener;
+		this.container=container;
 		arrierePlan = new BufferedImage(l, h, BufferedImage.TYPE_INT_RGB);
 		buffer = arrierePlan.getGraphics();
 		addMouseListener(this);
@@ -178,30 +178,30 @@ public class Menu extends JPanel implements MouseListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 	//GoTo Menu nbr Joueurs
 		if(arg0.getSource()==menuPlay){			
-			contener.setContentPane(new Menu(1,l,h,contener));
-			contener.setVisible(true); 
+			container.setContentPane(new Menu(1,l,h,container));
+			container.setVisible(true); 
 	//GoTo close
 		}else if(arg0.getSource()==menuQuit||arg0.getSource()==jeuQuit)
 			 System.exit (0);
 		
 	//GoTo Menu principal
 		else if(arg0.getSource()==jeuMenu){		
-			contener.setContentPane(new Menu(0,l,h,contener));
-			contener.setVisible(true);  
+			container.setContentPane(new Menu(0,l,h,container));
+			container.setVisible(true);  
 	//GoTo Options
 		}else if(arg0.getSource()==menuOption){		
-			contener.setContentPane(new Menu(2,l,h,contener));
-			contener.setVisible(true);  
+			container.setContentPane(new Menu(2,l,h,container));
+			container.setVisible(true);  
 	//GoTo game
 		}else if(arg0.getSource()==menu2){
-			contener.setContentPane(new ChoixPerso(2,l,h,contener));
-			contener.setVisible(true);
+			container.setContentPane(new ChoixPerso(2,l,h,container));
+			container.setVisible(true);
 		} else if(arg0.getSource()==menu3){
-			contener.setContentPane(new ChoixPerso(3,l,h,contener));
-			contener.setVisible(true);
+			container.setContentPane(new ChoixPerso(3,l,h,container));
+			container.setVisible(true);
 		} else if(arg0.getSource()==menu4){
-			contener.setContentPane(new ChoixPerso(4,l,h,contener));
-			contener.setVisible(true);
+			container.setContentPane(new ChoixPerso(4,l,h,container));
+			container.setVisible(true);
 		}
 	}
 }
