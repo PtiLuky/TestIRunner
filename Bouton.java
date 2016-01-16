@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 
 public class Bouton extends JButton implements MouseListener{
+	static final long serialVersionUID=235812;
 	private BufferedImage imgNeutre, imgUp, imgReleased, imgActuelle;
 	private int x,y,l,h;
 /**
